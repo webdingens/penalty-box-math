@@ -14,6 +14,7 @@ const initialState = {
   settingsMenuOpen: false,
   helpOpen: false,
   smallStopwatch: false,
+  virtualNumblock: false,
 }
 
 const actions = {
@@ -22,6 +23,7 @@ const actions = {
   SET_HELP_OPEN: 'SET_HELP_OPEN',
   SET_MODE: 'SET_MODE',
   SET_SMALL_STOPWATCH: 'SET_SMALL_STOPWATCH',
+  SET_VIRTUAL_NUMBLOCK: 'SET_VIRTUAL_NUMBLOCK',
 }
 
 const reducer = (state, action) => {
@@ -50,6 +52,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         smallStopwatch: action.smallStopwatch
+      };
+    case actions.SET_VIRTUAL_NUMBLOCK:
+      return {
+        ...state,
+        virtualNumblock: action.virtualNumblock
       };
     default:
       return state;
@@ -87,6 +94,9 @@ export const Provider = ({ children }) => {
     },
     setSmallStopwatch: (smallStopwatch) => {
       dispatch({ type: actions.SET_SMALL_STOPWATCH, smallStopwatch })
+    },
+    setVirtualNumblock: (virtualNumblock) => {
+      dispatch({ type: actions.SET_VIRTUAL_NUMBLOCK, virtualNumblock })
     },
   }
 

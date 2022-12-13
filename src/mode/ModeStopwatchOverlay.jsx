@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useContext } from 'react'
 import gaussian from 'gaussian'
 import Stopwatch from '../components/Stopwatch'
 import ModeStopwatchOverlayInputKeyboard from './ModeStopwatchOverlayInputKeyboard'
+import ModeStopwatchOverlayInputVirtualNumblock from './ModeStopwatchOverlayInputVirtualNumblock'
+import SettingsContext from '../SettingsContext'
 
 import {FiX, FiXSquare} from 'react-icons/fi'
 
@@ -34,6 +36,8 @@ function ModeStopwatchOverlay() {
   const [timeAttackDisplayTime, setTimeAttackDisplayTime] = useState(null)
   const [timeAttackSolvedCount, setTimeAttackSolvedCount] = useState(0)
 
+  const settings = useContext(SettingsContext.Context)
+
   const inputControl = useRef();
 
   const setRandomTime = useCallback(() => {
@@ -57,7 +61,7 @@ function ModeStopwatchOverlay() {
     setPenalties(penalties.penalties)
   }, []);
 
-  const onClickNext = useCallback(() => {
+  const onNext = useCallback(() => {
     setRandomTime()
     setRandomPenalty()
     setIsValid(null)
@@ -148,18 +152,26 @@ function ModeStopwatchOverlay() {
   }, [timeAttackStarted])
 
   return (
-    <form className={styles.form} onSubmit={onSubmit} autoComplete="off">
+    <form className={styles.form} autoComplete="off" onSubmit={onSubmit}>
       <p><strong>Time skater sat down:</strong></p>
       <Stopwatch time={time}/>
 
-
-      <ModeStopwatchOverlayInputKeyboard
-        ref={inputControl}
-        onClickNext={onClickNext}
-        isValid={isValid}
-        penalties={penalties}
-      />
-
+      {settings.virtualNumblock ? (
+        <ModeStopwatchOverlayInputVirtualNumblock
+          ref={inputControl}
+          onNext={onNext}
+          onEnter={verifyInput}
+          isValid={isValid}
+          penalties={penalties}
+        />
+      ) : (
+        <ModeStopwatchOverlayInputKeyboard
+          ref={inputControl}
+          onNext={onNext}
+          isValid={isValid}
+          penalties={penalties}
+        />
+      )}
 
       {timeAttackStarted !== TIME_ATTACK_STATES.RUNNING ? (
         <button type="button"

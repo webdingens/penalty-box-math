@@ -21,7 +21,10 @@ X add addition tables
 X option for smaller Stopwatch (+/- Icon, Stop), smaller Stopwatch is just the display as CSS
 X Time Attack mode
 X use 2 penalties at random
-- add virtual keyboard to type directly (mobile)
+X add virtual keyboard to type directly (mobile)
+  - optimize layout to fit onto mobile screens
+    - maybe style the enter button differently for feedback, add status message below "Enter"
+    - fit numblock into lower part responsively
 
 ## Variations
 

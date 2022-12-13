@@ -1,0 +1,83 @@
+.svg {
+  width: 240px;
+  max-width: 100%;
+
+  rect {
+    stroke: black;
+  }
+
+  text {
+    user-select: none;
+  }
+}
+
+.inputFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.inputLabel {
+  margin-bottom: .5rem;
+}
+
+.inputField {
+  place-content: center;
+  place-items: center;
+
+  margin-top: 0;
+  padding: 10px;
+  border-radius: 6px;
+
+  min-height: calc(1.4em + 20px);
+
+  color: #1d1d1d;
+  color: var(--form-text);
+  background-color: #efefef;
+  background-color: var(--background);
+
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
+    color: var(--form-text);
+    background-color: #161f27;
+    background-color: var(--background);
+  }
+
+  span {
+    animation: blinkblink 2s infinite;
+  }
+}
+
+@keyframes blinkblink {
+  from {
+    opacity: 1;
+  }
+  59.9% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0
+  }
+}
+
+.controls {
+  position: relative;
+  margin-top: 1rem;
+
+  button {
+    margin: 0;
+  }
+}
+
+.feedback {
+  position: absolute;
+
+  top: 100%;
+  left: 50%;
+  max-width: 100%;
+
+  transform: translate(-50%, 0);
+}

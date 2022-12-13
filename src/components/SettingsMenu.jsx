@@ -45,6 +45,14 @@ function SettingsMenu() {
           Two fields per input
         </label>
         <label>
+          <input type="checkbox" checked={settings.virtualNumblock}
+            onChange={(evt) => {
+              settings.setVirtualNumblock(evt.target.checked)
+            }}
+          />
+          Use virtual numblock
+        </label>
+        <label>
           Mode
           <select
             onChange={(evt) => {

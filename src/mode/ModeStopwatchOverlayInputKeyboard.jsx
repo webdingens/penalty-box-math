@@ -37,7 +37,7 @@ class ModeStopwatchOverlayInputKeyboard extends React.Component {
   }
 
   render() {
-    const {onClickNext, isValid, penalties} = this.props
+    const {onNext, isValid, penalties} = this.props
 
     return (
       <>
@@ -56,7 +56,7 @@ class ModeStopwatchOverlayInputKeyboard extends React.Component {
           ) : null}
           {isValid === true ? (
             <>
-              <button onClick={onClickNext} type="button" ref={this.nextButton}>Next</button>
+              <button onClick={onNext} type="button" ref={this.nextButton}>Next</button>
               <p className={styles.feedback}>Correct answer!</p>
             </>
           ) : null}
