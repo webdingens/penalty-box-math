@@ -1,0 +1,18 @@
+.controls {
+  position: relative;
+  margin-top: 1rem;
+
+  button {
+    margin: 0;
+  }
+}
+
+.feedback {
+  position: absolute;
+
+  top: 100%;
+  left: 50%;
+  max-width: 100%;
+
+  transform: translate(-50%, 0);
+}

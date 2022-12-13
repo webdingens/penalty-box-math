@@ -1,0 +1,84 @@
+.stopwatch {
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  display: inline-block;
+  border-radius: 6px;
+
+  img {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  button {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    margin: 0;
+    padding: .5rem;
+    z-index: 1;
+    color: #000;
+    background: none;
+    svg {
+      display: block;
+    }
+
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.timeOverlay {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  color: #000;
+  z-index: 1;
+
+  font-family: 'Noto Sans Mono';
+  font-variation-settings: "wght" 700, "wdth" 62.5;
+  font-feature-settings: "zero";
+  font-size: calc(.165 * var(--watch-width));
+  transform: translateY(-0.10em) translateX(calc(-.09 * var(--watch-width))) translate(-50%, -50%);
+
+  &__left {
+    position: absolute;
+    right: 100%;
+    top: 0;
+  }
+
+  &__right {
+    position: absolute;
+    left: 100%;
+    top: 0;
+  }
+
+  &__milliseconds {
+    font-size: calc(.1 * var(--watch-width));
+    font-variation-settings: "wght" 700, "wdth" 100;
+    margin-left: .1em;
+  }
+}
+
+.smallStopwatch {
+  width: 200px;
+
+  .timeOverlay {
+    font-size: calc(.3 * var(--watch-width));
+    transform: translateY(-0.65em) translateX(calc(-.19 * var(--watch-width))) translate(-50%, -50%);
+
+    &__milliseconds {
+      font-size: calc(.1 * (.3 / .165) * var(--watch-width));
+      font-variation-settings: "wght" 700, "wdth" 100;
+      margin-left: .1em;
+    }
+  }
+}
+
+.lcdDisplay {
+  aspect-ratio: 200 / 90;
+  background: #9b9b9b;
+  border-radius: 6px;
+  box-shadow: inset 0.1rem -0.25rem 0.8rem 0 rgb(0 0 0 / 31%);
+}

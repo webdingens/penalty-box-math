@@ -1,0 +1,78 @@
+.form {
+  max-width: 100%;
+  width: 350px;
+  margin: 4.5rem auto 1rem;
+
+  padding-bottom: 2.25rem;
+}
+
+.timeAttackButton {
+  position: fixed;
+  top: 1rem;
+  right: 5rem;
+  margin: 0;
+  padding-top: 9px;
+  background: #ff9999;
+  padding-inline: 1.25rem;
+
+  display: inline-flex;
+  place-items: center;
+
+  &:hover {
+    background: #ff4141;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: #660000;
+  
+    &:hover {
+      background: #880000;
+    }
+  }
+
+  svg {
+    display: block;
+    margin-left: 1rem;
+    margin-right: -.25rem;
+  }
+}
+
+.resultsOverlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1.5rem;
+  z-index: 1;
+
+  width: 450px;
+  max-width: 100%;
+  height: 500px;
+  max-height: 100%;
+  opacity: 1;
+
+  display: flex;
+  place-items: center;
+  place-content: center;
+
+  background: #d2d2d2;
+
+  @media (prefers-color-scheme: dark) {
+    background: #020508
+  }
+
+  &__closeButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.75rem;
+
+    svg {
+      display: block;
+    }
+  }
+
+  button {
+    margin: 0;
+  }
+}

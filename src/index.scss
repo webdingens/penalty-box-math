@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'zcool';
+  src: url(./fonts/ZCOOL_QingKe_HuangYou/ZCOOLQingKeHuangYou-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans Mono';
+  src: url(./fonts/Noto_Sans_Mono/NotoSansMono-VariableFont_wdth_wght.ttf) format('truetype');
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  text-align: center;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  place-items: center;
+  min-height: 100vh;
+  margin-top: 0;
+  margin-bottom: 0;
+}
