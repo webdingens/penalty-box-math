@@ -8,22 +8,22 @@ class ModeStopwatchOverlayInputKeyboard extends React.Component {
   constructor(props) {
     super(props)
 
-    this.inputAdd20 = React.createRef()
-    this.inputAdd30 = React.createRef()
+    this.inputAdd1 = React.createRef()
+    this.inputAdd2 = React.createRef()
     this.nextButton = React.createRef()
   }
 
   reset() {
-    this.inputAdd20.current.reset()
-    this.inputAdd30.current.reset()
+    this.inputAdd1.current.reset()
+    this.inputAdd2.current.reset()
   }
 
-  get value20() {
-    return this.inputAdd20.current.value
+  get value1() {
+    return this.inputAdd1.current.value
   }
 
-  get value30() {
-    return this.inputAdd30.current.value
+  get value2() {
+    return this.inputAdd2.current.value
   }
 
   componentDidUpdate(prevProps) {
@@ -33,23 +33,22 @@ class ModeStopwatchOverlayInputKeyboard extends React.Component {
   }
 
   focus() {
-    this.inputAdd20.current.focus()
+    this.inputAdd1.current.focus()
   }
 
   render() {
-    const {onClickNext, isValid} = this.props
+    const {onClickNext, isValid, penalties} = this.props
 
     return (
       <>
+        <p>{penalties ? `${penalties} ${penalties == 1 ? 'Penalty' : 'Penalties'}` : ''}</p>
         <Input
-          id="add20"
-          label="Add 20 seconds"
-          ref={this.inputAdd20}
+          label={penalties ? `Add ${30 * penalties - 10} seconds` : ''}
+          ref={this.inputAdd1}
         />
         <Input
-          id="add30"
-          label="Add 30 seconds"
-          ref={this.inputAdd30}
+          label={penalties ? `Add ${30 * penalties} seconds` : ''}
+          ref={this.inputAdd2}
         />
         <div className={styles.controls}>
           {isValid === false || isValid === null ? (

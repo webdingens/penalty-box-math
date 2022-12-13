@@ -13,19 +13,18 @@ X add settings
 X option for all input fields: Split into minute and seconds fields (might be better for mobile)
 X add addition tables
 - click outside should close menu
-- add highscores
-- add error tracking
-- add "you are ready" message (Maybe not? It is not the apps place to say.)
-- show instructions after switching the mode
-  - move the input field help from the help overlay to the mode overlay
+- menu open shouldn't be part of the initial state of settings
+  - should stay part of settings because of each menu toggling off the other when opening (mutually exclusive to share space)
+
+## Stopwatch
+
+X option for smaller Stopwatch (+/- Icon, Stop), smaller Stopwatch is just the display as CSS
+X Time Attack mode
+X use 2 penalties at random
+- add virtual keyboard to type directly (mobile)
 
 ## Variations
 
-X Stopwatch
-  X option for smaller Stopwatch (+/- Icon, Stop), smaller Stopwatch is just the display as CSS
-  X Time Attack mode
-  - use 2 penalties at random
-  - add virtual keyboard to type directly (mobile)
 - Sheet
 - Stopwatch + Sheet
 - Prompt question with a "reveal" button, switches to (("next") or ("got it": "right" and "wrong")) button
@@ -39,3 +38,8 @@ X Stopwatch
   - \d{0,1} : \d{2}
   - [:\d]{3,4}
 - Add better responses / brighter button
+- show instructions after switching the mode
+  - move the input field help from the help overlay to the mode overlay
+- add error tracking (correctness of input)
+- add highscores
+- Stopwatch: add probability settings option (0-100% only one penalty, rest two penalties) Input how?

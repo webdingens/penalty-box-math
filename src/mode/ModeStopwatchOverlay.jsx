@@ -9,6 +9,17 @@ import styles from './ModeStopwatchOverlay.module.scss'
 
 const gaussdistribution = gaussian(0, Math.pow(2 * 60, 2))
 
+const penaltyProbabilities = [
+  {
+    penalties: 1,
+    probability: .8
+  },
+  {
+    penalties: 2,
+    probability: .2
+  },
+]
+
 const TIME_ATTACK_STATES = {
   STOPPED: 'STOPPED',
   RUNNING: 'RUNNING',
@@ -17,6 +28,7 @@ const TIME_ATTACK_STATES = {
 
 function ModeStopwatchOverlay() {
   const [time, setTime] = useState(null)
+  const [penalties, setPenalties] = useState(null)
   const [isValid, setIsValid] = useState(null)
   const [timeAttackStarted, setTimeAttackStarted] = useState(TIME_ATTACK_STATES.STOPPED)
   const [timeAttackDisplayTime, setTimeAttackDisplayTime] = useState(null)
@@ -30,33 +42,50 @@ function ModeStopwatchOverlay() {
     setTime(newTime)
   }, []);
 
+  const setRandomPenalty = useCallback(() => {
+    // draw randomly
+    const sample = Math.random();
+    let penalties = penaltyProbabilities.reduce((prev, current) => {
+      if (typeof prev === 'object') return prev;
+      if (prev + current.probability > sample) return current
+      return prev + current.probability
+    }, 0)
+
+    // if nothing gets selected because of rounding errors near the end, select last entry
+    if (typeof penalties !== 'object') penalties = penaltyProbabilities[penaltyProbabilities.length -1]
+
+    setPenalties(penalties.penalties)
+  }, []);
+
   const onClickNext = useCallback(() => {
     setRandomTime()
+    setRandomPenalty()
     setIsValid(null)
     inputControl.current.reset()
     inputControl.current.focus()
   }, []);
 
   const verifyInput = useCallback(() => {
-    let timeAdd20 = inputControl.current.value20.split(':')
-    if (timeAdd20.length !== 2) {
+    let timeAdd1 = inputControl.current.value1.split(':')
+    if (timeAdd1.length !== 2) {
       setIsValid(false)
       return
     }
-    let timeAdd30 = inputControl.current.value30.split(':')
-    if (timeAdd30.length !== 2) {
+    let timeAdd2 = inputControl.current.value2.split(':')
+    if (timeAdd2.length !== 2) {
       setIsValid(false)
       return
     }
-    timeAdd20 = (timeAdd20[0] == '' ? 0 : parseInt(timeAdd20[0])) * 60 + parseInt(timeAdd20[1])
-    timeAdd30 = (timeAdd30[0] == '' ? 0 : parseInt(timeAdd30[0])) * 60 + parseInt(timeAdd30[1])
+    timeAdd1 = (timeAdd1[0] == '' ? 0 : parseInt(timeAdd1[0])) * 60 + parseInt(timeAdd1[1])
+    timeAdd2 = (timeAdd2[0] == '' ? 0 : parseInt(timeAdd2[0])) * 60 + parseInt(timeAdd2[1])
 
-    if (timeAdd20 === time + 20 && timeAdd30 === time + 30) {
+    if (timeAdd1 === time + (penalties * 30 - 10) &&
+        timeAdd2 === time + (penalties * 30)) {
       setIsValid(true)
     } else {
       setIsValid(false)
     }
-  }, [time]);
+  }, [time, penalties]);
 
   const onSubmit = useCallback((evt) => {
     evt.preventDefault()
@@ -69,6 +98,7 @@ function ModeStopwatchOverlay() {
   // init
   useEffect(() => {
     setRandomTime()
+    setRandomPenalty()
     inputControl.current.focus()
   }, []);
 
@@ -91,6 +121,7 @@ function ModeStopwatchOverlay() {
     setTimeAttackDisplayTime(duration)
     setTimeAttackSolvedCount(0)
     setRandomTime()
+    setRandomPenalty()
     inputControl.current.reset()
     inputControl.current.focus()
     let raf
@@ -126,6 +157,7 @@ function ModeStopwatchOverlay() {
         ref={inputControl}
         onClickNext={onClickNext}
         isValid={isValid}
+        penalties={penalties}
       />
 
 
