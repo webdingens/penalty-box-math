@@ -3,6 +3,11 @@
   src: url(./fonts/Noto_Sans_Mono/static/NotoSansMono_ExtraCondensed/NotoSansMono_ExtraCondensed-Bold.ttf) format('truetype');
 }
 
+html {
+  overflow: hidden;
+  width: 100%;
+}
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,10 +24,13 @@
 }
 
 body {
+  height: 100%;
+  position: fixed;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
   display: flex;
   place-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
   margin-top: 0;
   margin-bottom: 0;
   padding: 0 1rem;
