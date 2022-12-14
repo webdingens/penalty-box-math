@@ -4,6 +4,7 @@
 .svg {
   width: 100%;
   max-height: calc(100vh - var(--navbar-height, 0) - var(--stopwatch-container-height, 0) - var(--numblock-top-part-height, 0) - 1rem);
+  max-height: calc(100lvh - var(--navbar-height, 0) - var(--stopwatch-container-height, 0) - var(--numblock-top-part-height, 0) - 1rem);
 
   rect {
     stroke: black;
