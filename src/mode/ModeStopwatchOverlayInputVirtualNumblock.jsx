@@ -87,10 +87,7 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
   }
 
   onResize = () => {
-    const numblockContainerHeight = this.module.current.clientHeight
-    const topPartHeight = this.topPart.current.clientHeight
-    this.module.current.style.setProperty('--numblock-container-height', `${numblockContainerHeight}px`)
-    this.module.current.style.setProperty('--numblock-top-part-height', `${topPartHeight}px`)
+    this.module.current.style.setProperty('--numblock-top-part-height', `${this.topPart.current.clientHeight}px`)
   }
 
   componentDidMount() {
