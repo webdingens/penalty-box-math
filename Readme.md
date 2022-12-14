@@ -12,11 +12,11 @@ X add nice looking css library
 X add settings
 X option for all input fields: Split into minute and seconds fields (might be better for mobile)
 X add addition tables
+X change page title
+X use invariable font face of noto sans
 - click outside should close menu
 - menu open shouldn't be part of the initial state of settings
   - should stay part of settings because of each menu toggling off the other when opening (mutually exclusive to share space)
-- make page work offline, add serviceworker
-- change page title
 - add favicon
 
 ## Stopwatch
@@ -30,6 +30,7 @@ X add virtual keyboard to type directly (mobile)
     - fit numblock into lower part responsively
   - test on real phone whether the keys work or not
   - add "active" state to keys, some visual response (maybe auditory?)
+  - fix styling of light mode virtual numblock
 
 ## Variations
 
@@ -51,3 +52,4 @@ X add virtual keyboard to type directly (mobile)
 - add error tracking (correctness of input)
 - add highscores
 - Stopwatch: add probability settings option (0-100% only one penalty, rest two penalties) Input how?
+- make page work offline, add serviceworker
