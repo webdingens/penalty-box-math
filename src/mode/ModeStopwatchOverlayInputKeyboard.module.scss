@@ -1,3 +1,16 @@
+.penaltyAmount {
+  font-weight: 700;
+}
+
+.trickyPenaltyAmount {
+  text-decoration: underline;
+  color: rgb(181, 0, 0);
+
+  @media (prefers-color-scheme: dark) {
+    color: rgb(255, 155, 155);
+  }
+}
+
 .controls {
   position: relative;
   margin-top: 1rem;

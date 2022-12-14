@@ -1,6 +1,5 @@
 import React from 'react'
-import Input from '../components/Input'
-
+import classNames from 'classnames'
 import styles from './ModeStopwatchOverlayInputVirtualNumblock.module.scss'
 
 class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
@@ -91,7 +90,14 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
 
     return (
       <div ref={this.module}>
-        <p>{penalties ? `${penalties} ${penalties == 1 ? 'Penalty' : 'Penalties'}` : ''}</p>
+        <p>{penalties ? (
+          <>
+            <span className={classNames(styles.penaltyAmount, {
+              [styles.trickyPenaltyAmount]: penalties > 1
+            })}>{penalties}</span> {penalties == 1 ? 'Penalty' : 'Penalties'}
+          </>
+        ) : null}
+        </p>
 
         <div className={styles.inputFields}>
           <div
@@ -100,7 +106,15 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
               input2Focussed: false,
             })}
           >
-            <p className={styles.inputLabel}>{penalties ? `Add ${30 * penalties - 10} seconds` : ''}</p>
+            <p className={styles.inputLabel}>
+              {penalties ? (
+                <>
+                  Add <span className={classNames(styles.penaltyAmount, {
+                    [styles.trickyPenaltyAmount]: penalties > 1
+                  })}>{30 * penalties - 10}</span> seconds
+                </>
+              ) : null}
+            </p>
             <p className={styles.inputField}>
               {this.state.value1}
               {this.state.input1Focussed ? (
@@ -114,7 +128,14 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
               input2Focussed: true
             })}
           >
-            <p className={styles.inputLabel}>{penalties ? `Add ${30 * penalties} seconds` : ''}</p>
+            <p className={styles.inputLabel}>
+              {penalties ? (
+                <>
+                  Add <span className={classNames(styles.penaltyAmount, {
+                    [styles.trickyPenaltyAmount]: penalties > 1
+                  })}>{30 * penalties}</span> seconds
+                </>
+              ) : null}</p>
             <p className={styles.inputField}>
               {this.state.value2}
               {this.state.input2Focussed ? (
@@ -230,10 +251,16 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
 
         <div className={styles.controls}>
           {isValid === true ? (
-            <p className={styles.feedback}>Correct answer!</p>
+            <>
+              <p className={styles.feedback}>Correct answer!</p>
+              <div className={styles.feedbackGlowSuccess}></div>
+            </>
           ) : null}
           {isValid === false ? (
-            <p className={styles.feedback}>Not correct.</p>
+            <>
+              <p className={styles.feedback}>Not correct.</p>
+              <div className={styles.feedbackGlowFailure}></div>
+            </>
           ) : null}
         </div>
       </div>

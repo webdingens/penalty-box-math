@@ -24,13 +24,19 @@ X use invariable font face of noto sans
 X option for smaller Stopwatch (+/- Icon, Stop), smaller Stopwatch is just the display as CSS
 X Time Attack mode
 X use 2 penalties at random
+  X make it more visible that we have more than one penalty
+X make small stopwatch and virtual numpad initial state on mobile / low viewport
 X add virtual keyboard to type directly (mobile)
-  - optimize layout to fit onto mobile screens
+  X test on real phone whether the keys work or not
+  X fix styling of light mode virtual numblock
+  X add "active" state to keys
+    - use different color
+  - optimize layout to fit onto mobile screens so we can't scroll (which absorbs clicks sometimes)
     - maybe style the enter button differently for feedback, add status message below "Enter"
     - fit numblock into lower part responsively
-  - test on real phone whether the keys work or not
-  - add "active" state to keys, some visual response (maybe auditory?)
-  - fix styling of light mode virtual numblock
+  - add some visual response (maybe auditory?)
+  - add error/success feedback
+- Add better responses / brighter button
 
 ## Variations
 
@@ -46,10 +52,9 @@ X add virtual keyboard to type directly (mobile)
 - check if input only has correct character e.g. matches either regex of
   - \d{0,1} : \d{2}
   - [:\d]{3,4}
-- Add better responses / brighter button
 - show instructions after switching the mode
   - move the input field help from the help overlay to the mode overlay
 - add error tracking (correctness of input)
-- add highscores
+- add highscores (same as statistics?)
 - Stopwatch: add probability settings option (0-100% only one penalty, rest two penalties) Input how?
 - make page work offline, add serviceworker

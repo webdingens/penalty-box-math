@@ -71,7 +71,7 @@ class Input extends React.Component {
       <div className={classNames(styles.input, {
         [styles.splitInput]: settings.splitInput
       })}>
-        <label htmlFor={id} dangerouslySetInnerHTML={{__html: label}}></label>
+        <label htmlFor={id}>{label}</label>
         <div className={styles.inputFieldWrapper}>
           <input
             id={id}

@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import Input from '../components/Input'
 
 import styles from './ModeStopwatchOverlayInputKeyboard.module.scss'
@@ -41,13 +42,32 @@ class ModeStopwatchOverlayInputKeyboard extends React.Component {
 
     return (
       <>
-        <p>{penalties ? `${penalties} ${penalties == 1 ? 'Penalty' : 'Penalties'}` : ''}</p>
+        <p>{penalties ? (
+          <>
+            <span className={classNames(styles.penaltyAmount, {
+              [styles.trickyPenaltyAmount]: penalties > 1
+            })}>{penalties}</span> {penalties == 1 ? 'Penalty' : 'Penalties'}
+          </>
+        ) : null}
+        </p>
         <Input
-          label={penalties ? `Add ${30 * penalties - 10} seconds` : ''}
+          label={penalties ? (
+            <>
+              Add <span className={classNames(styles.penaltyAmount, {
+                [styles.trickyPenaltyAmount]: penalties > 1
+              })}>{30 * penalties - 10}</span> seconds
+            </>
+          ) : null}
           ref={this.inputAdd1}
         />
         <Input
-          label={penalties ? `Add ${30 * penalties} seconds` : ''}
+          label={penalties ? (
+            <>
+              Add <span className={classNames(styles.penaltyAmount, {
+                [styles.trickyPenaltyAmount]: penalties > 1
+              })}>{30 * penalties}</span> seconds
+            </>
+          ) : null}
           ref={this.inputAdd2}
         />
         <div className={styles.controls}>

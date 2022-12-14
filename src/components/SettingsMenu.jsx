@@ -42,7 +42,7 @@ function SettingsMenu() {
               settings.setSplitInput(evt.target.checked)
             }}
           />
-          Two fields per input
+          Two fields per input (keyboard)
         </label>
         <label>
           <input type="checkbox" checked={settings.virtualNumblock}
@@ -52,7 +52,7 @@ function SettingsMenu() {
           />
           Use virtual numblock
         </label>
-        <label>
+        {/* <label>
           Mode
           <select
             onChange={(evt) => {
@@ -66,7 +66,7 @@ function SettingsMenu() {
               )
             })}
           </select>
-        </label>
+        </label> */}
       </div>
     </div>
   )

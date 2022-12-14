@@ -13,8 +13,8 @@ const initialState = {
   mode: modes.STOPWATCH_OVERLAY,
   settingsMenuOpen: false,
   helpOpen: false,
-  smallStopwatch: false,
-  virtualNumblock: false,
+  smallStopwatch: window.innerHeight < 1000,
+  virtualNumblock: window.innerWidth < 600,
 }
 
 const actions = {
