@@ -70,7 +70,7 @@ function Help() {
         <button type="button"
           onClick={() => setHideLastSecondsDigit(!hideLastSecondsDigit)}
         >
-          {hideLastSecondsDigit ? 'Show' : 'Hide'} last seconds digit
+          {hideLastSecondsDigit ? 'Show' : 'Hide'} right seconds digit
         </button>
         <table>
           <tbody>

@@ -36,9 +36,8 @@
   color: #000;
   z-index: 1;
 
-  font-family: 'Noto Sans Mono';
-  font-variation-settings: "wght" 700, "wdth" 62.5;
-  font-feature-settings: "zero";
+  font-family: 'Noto Sans Mono Extra Condensed Bold';
+
   font-size: calc(.165 * var(--watch-width));
   transform: translateY(-0.10em) translateX(calc(-.09 * var(--watch-width))) translate(-50%, -50%);
 
