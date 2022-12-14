@@ -15,6 +15,9 @@ X add addition tables
 - click outside should close menu
 - menu open shouldn't be part of the initial state of settings
   - should stay part of settings because of each menu toggling off the other when opening (mutually exclusive to share space)
+- make page work offline, add serviceworker
+- change page title
+- add favicon
 
 ## Stopwatch
 
@@ -25,6 +28,8 @@ X add virtual keyboard to type directly (mobile)
   - optimize layout to fit onto mobile screens
     - maybe style the enter button differently for feedback, add status message below "Enter"
     - fit numblock into lower part responsively
+  - test on real phone whether the keys work or not
+  - add "active" state to keys, some visual response (maybe auditory?)
 
 ## Variations
 
