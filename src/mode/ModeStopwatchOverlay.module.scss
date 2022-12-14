@@ -1,9 +1,17 @@
+@use "sass:math";
+
 .form {
   max-width: 100%;
   width: 350px;
-  margin: 4.5rem auto 1rem;
+  padding: var(--navbar-height) 0 0;
+  margin-inline: auto;
+}
 
-  padding-bottom: 2.25rem;
+.stopwatchLabel {
+  margin-top: 0;
+  font-weight: 400;
+  margin-bottom: .25rem;
+  font-size: 1rem * math.div(14, 16);
 }
 
 .timeAttackButton {

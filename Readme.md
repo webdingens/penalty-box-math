@@ -36,6 +36,9 @@ X add virtual keyboard to type directly (mobile)
     - fit numblock into lower part responsively
   - add some visual response (maybe auditory?)
   - add error/success feedback
+  - Delete button should become left button when right is focussed and nothing is left to delete
+  - add finer cursor control, like click at the beginning of the button
+  - replace svg with css grid and real buttons
 - Add better responses / brighter button
 
 ## Variations

@@ -39,6 +39,8 @@ function ModeStopwatchOverlay() {
   const settings = useContext(SettingsContext.Context)
 
   const inputControl = useRef();
+  const stopwatchContainer = useRef();
+  const module = useRef();
 
   const setRandomTime = useCallback(() => {
     // const newTime = Math.floor(Math.random() * (5 * 60 + 1)) // 5 minutes
@@ -151,10 +153,23 @@ function ModeStopwatchOverlay() {
     return () => raf && cancelAnimationFrame(raf)
   }, [timeAttackStarted])
 
+  // responsive custom property --stopwatch-container-height
+  useEffect(() => {
+    const onResize = () => {
+      const stopwatchContainerHeight = stopwatchContainer.current.clientHeight
+      module.current.style.setProperty('--stopwatch-container-height', `${stopwatchContainerHeight}px`)
+    }
+    onResize()
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   return (
-    <form className={styles.form} autoComplete="off" onSubmit={onSubmit}>
-      <p><strong>Time skater sat down:</strong></p>
-      <Stopwatch time={time}/>
+    <form ref={module} className={styles.form} autoComplete="off" onSubmit={onSubmit}>
+      <div ref={stopwatchContainer}>
+        <p className={styles.stopwatchLabel}>Time skater sat down:</p>
+        <Stopwatch time={time}/>
+      </div>
 
       {settings.virtualNumblock ? (
         <ModeStopwatchOverlayInputVirtualNumblock
@@ -173,6 +188,7 @@ function ModeStopwatchOverlay() {
         />
       )}
 
+      {/* Red time attack button at top */}
       {timeAttackStarted !== TIME_ATTACK_STATES.RUNNING ? (
         <button type="button"
           className={styles.timeAttackButton}
@@ -190,6 +206,7 @@ function ModeStopwatchOverlay() {
         </button>
       )}
 
+      {/* Results overlay after time attack */}
       {timeAttackStarted === TIME_ATTACK_STATES.RESULTS ? (
         <div className={styles.resultsOverlay}>
           <button type="button"

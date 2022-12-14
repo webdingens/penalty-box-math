@@ -8,6 +8,7 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
     super(props)
 
     this.module = React.createRef()
+    this.topPart = React.createRef()
   }
 
   state = {
@@ -85,63 +86,87 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
     }
   }
 
+  onResize = () => {
+    const numblockContainerHeight = this.module.current.clientHeight
+    const topPartHeight = this.topPart.current.clientHeight
+    this.module.current.style.setProperty('--numblock-container-height', `${numblockContainerHeight}px`)
+    this.module.current.style.setProperty('--numblock-top-part-height', `${topPartHeight}px`)
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.onResize)
+    this.onResize()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.penalties && this.props.penalties) {
+      this.onResize()
+    }
+  }
+
   render() {
     const {isValid, penalties} = this.props
 
     return (
       <div ref={this.module}>
-        <p>{penalties ? (
-          <>
-            <span className={classNames(styles.penaltyAmount, {
-              [styles.trickyPenaltyAmount]: penalties > 1
-            })}>{penalties}</span> {penalties == 1 ? 'Penalty' : 'Penalties'}
-          </>
-        ) : null}
-        </p>
+        <div ref={this.topPart}>
+          <p className={styles.penaltyAmount}>{penalties ? (
+            <>
+              <span className={classNames(styles.penaltyAmountHighlight, {
+                [styles.trickyPenaltyAmountHighlight]: penalties > 1
+              })}>{penalties}</span> {penalties == 1 ? 'Penalty' : 'Penalties'}
+            </>
+          ) : null}
+          </p>
 
-        <div className={styles.inputFields}>
-          <div
-            onClick={() => this.setState({
-              input1Focussed: true,
-              input2Focussed: false,
-            })}
-          >
-            <p className={styles.inputLabel}>
-              {penalties ? (
-                <>
-                  Add <span className={classNames(styles.penaltyAmount, {
-                    [styles.trickyPenaltyAmount]: penalties > 1
-                  })}>{30 * penalties - 10}</span> seconds
-                </>
-              ) : null}
-            </p>
-            <p className={styles.inputField}>
-              {this.state.value1}
-              {this.state.input1Focussed ? (
-                <span>|</span>
-              ) : null}
-            </p>
-          </div>
-          <div
-            onClick={() => this.setState({
-              input1Focussed: false,
-              input2Focussed: true
-            })}
-          >
-            <p className={styles.inputLabel}>
-              {penalties ? (
-                <>
-                  Add <span className={classNames(styles.penaltyAmount, {
-                    [styles.trickyPenaltyAmount]: penalties > 1
-                  })}>{30 * penalties}</span> seconds
-                </>
-              ) : null}</p>
-            <p className={styles.inputField}>
-              {this.state.value2}
-              {this.state.input2Focussed ? (
-                <span>|</span>
-              ) : null}
-            </p>
+          <div className={styles.inputFields}>
+            <div
+              onClick={() => this.setState({
+                input1Focussed: true,
+                input2Focussed: false,
+              })}
+            >
+              <p className={styles.inputLabel}>
+                {penalties ? (
+                  <>
+                    Add <span className={classNames(styles.penaltyAmountHighlight, {
+                      [styles.trickyPenaltyAmountHighlight]: penalties > 1
+                    })}>{30 * penalties - 10}</span> seconds
+                  </>
+                ) : null}
+              </p>
+              <p className={styles.inputField}>
+                {this.state.value1}
+                {this.state.input1Focussed ? (
+                  <span>|</span>
+                ) : null}
+              </p>
+            </div>
+            <div
+              onClick={() => this.setState({
+                input1Focussed: false,
+                input2Focussed: true
+              })}
+            >
+              <p className={styles.inputLabel}>
+                {penalties ? (
+                  <>
+                    Add <span className={classNames(styles.penaltyAmountHighlight, {
+                      [styles.trickyPenaltyAmountHighlight]: penalties > 1
+                    })}>{30 * penalties}</span> seconds
+                  </>
+                ) : null}</p>
+              <p className={styles.inputField}>
+                {this.state.value2}
+                {this.state.input2Focussed ? (
+                  <span>|</span>
+                ) : null}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -249,20 +274,22 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
           </g>
         </svg>
 
-        <div className={styles.controls}>
-          {isValid === true ? (
-            <>
-              <p className={styles.feedback}>Correct answer!</p>
-              <div className={styles.feedbackGlowSuccess}></div>
-            </>
-          ) : null}
-          {isValid === false ? (
-            <>
-              <p className={styles.feedback}>Not correct.</p>
-              <div className={styles.feedbackGlowFailure}></div>
-            </>
-          ) : null}
-        </div>
+        {isValid !== null ? (
+          <div className={styles.controls}>
+            {isValid === true ? (
+              <>
+                <p className={styles.feedback}>Correct answer!</p>
+                <div className={styles.feedbackGlowSuccess}></div>
+              </>
+            ) : null}
+            {isValid === false ? (
+              <>
+                <p className={styles.feedback}>Not correct.</p>
+                <div className={styles.feedbackGlowFailure}></div>
+              </>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     )
   } 
