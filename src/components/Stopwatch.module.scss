@@ -65,6 +65,7 @@
 
   @media (max-height: 480px) {
     max-width: min(100%, 22vh);
+    max-width: min(100%, 22svh);
   }
 
   button {

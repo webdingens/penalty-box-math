@@ -3,6 +3,7 @@ import {Context as SettingsContext, modes} from '../SettingsContext'
 import ModeStopwatchOverlay from '../mode/ModeStopwatchOverlay'
 import SettingsMenu from './SettingsMenu'
 import Help from './Help'
+import FullScreenToggle from './FullScreenToggle'
 
 function Layout() {
   const state = useContext(SettingsContext);
@@ -24,6 +25,7 @@ function Layout() {
 
       <SettingsMenu />
       <Help />
+      <FullScreenToggle />
     </main>
   )
 }

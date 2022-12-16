@@ -21,10 +21,11 @@
 body {
   display: flex;
   place-items: center;
-  min-height: 100vh;
+  min-height: 100svh; // smallest viewport height, so the page doesn't scroll because of address bar
   margin-top: 0;
   margin-bottom: 0;
   padding: 0 1rem;
+  overscroll-behavior: contain; // disabling pull to refresh
 
   @media (max-width: 47.999rem) and (max-height: 60rem) {
     place-items: start;

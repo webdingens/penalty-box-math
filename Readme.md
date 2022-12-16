@@ -32,8 +32,9 @@ X add virtual keyboard to type directly (mobile)
   X add "active" state to keys
     - use different color
   - optimize layout to fit onto mobile screens
-    X so we can't scroll (which absorbs clicks sometimes) -> Doesn't work
     X fit numblock into lower part responsively
+    X so we can't scroll (which absorbs clicks sometimes) -> Doesn't work
+      X try again but with device inspector, also html, body { height: 100% or 100vh} sounds promising
     - Add fullscreen button, so the area don't wiggle wiggle (scrolls)
     - maybe style the enter button differently for feedback, add status message below "Enter"
     - Place the text response somewhere where we can read it
