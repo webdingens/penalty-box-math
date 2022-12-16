@@ -1,10 +1,12 @@
-import {useState, useEffect} from 'react'
+import {useContext, useEffect} from 'react'
+import SettingsContext from '../SettingsContext'
 
 import {FiMaximize, FiMinimize} from 'react-icons/fi'
 import styles from './FullScreenToggle.module.scss'
 
 function FullScreenToggle() {
-  const [inFullscreen, setInFullscreen] = useState(false)
+  const settings = useContext(SettingsContext.Context)
+  const {inFullscreen, setInFullscreen} = settings;
 
   if (!inFullscreen && document.fullscreenElement) document.exitFullscreen()  // navigate back using android nav leaves page in fullscreen hiding top
 

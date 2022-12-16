@@ -15,6 +15,7 @@ const initialState = {
   helpOpen: false,
   smallStopwatch: window.innerHeight < 1000,
   virtualNumblock: window.innerWidth < 600,
+  inFullscreen: false,
 }
 
 const actions = {
@@ -24,6 +25,7 @@ const actions = {
   SET_MODE: 'SET_MODE',
   SET_SMALL_STOPWATCH: 'SET_SMALL_STOPWATCH',
   SET_VIRTUAL_NUMBLOCK: 'SET_VIRTUAL_NUMBLOCK',
+  SET_IN_FULLSCREEN: 'SET_IN_FULLSCREEN',
 }
 
 const reducer = (state, action) => {
@@ -58,6 +60,11 @@ const reducer = (state, action) => {
         ...state,
         virtualNumblock: action.virtualNumblock
       };
+    case actions.SET_IN_FULLSCREEN:
+      return {
+        ...state,
+        inFullscreen: action.inFullscreen
+      };
     default:
       return state;
   }
@@ -68,7 +75,11 @@ const saveState = (state) => localStorage.setItem('settings', JSON.stringify(sta
 const loadState = () => {
   const storedState = localStorage.getItem('settings');
   if (!storedState) return initialState
-  return Object.assign({}, initialState, JSON.parse(localStorage.getItem('settings')))
+  return Object.assign({}, initialState, JSON.parse(localStorage.getItem('settings')), {
+    settingsMenuOpen: initialState.settingsMenuOpen,
+    helpOpen: initialState.helpOpen,
+    inFullscreen: initialState.inFullscreen,
+  })
 }
 
 export const Provider = ({ children }) => {
@@ -97,6 +108,9 @@ export const Provider = ({ children }) => {
     },
     setVirtualNumblock: (virtualNumblock) => {
       dispatch({ type: actions.SET_VIRTUAL_NUMBLOCK, virtualNumblock })
+    },
+    setInFullscreen: (inFullscreen) => {
+      dispatch({ type: actions.SET_IN_FULLSCREEN, inFullscreen })
     },
   }
 

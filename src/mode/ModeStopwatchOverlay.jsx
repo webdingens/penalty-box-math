@@ -162,7 +162,7 @@ function ModeStopwatchOverlay() {
     onResize()
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [])
+  }, [settings.smallStopwatch, settings.inFullscreen])
 
   return (
     <form ref={module} className={styles.form} autoComplete="off" onSubmit={onSubmit}>
