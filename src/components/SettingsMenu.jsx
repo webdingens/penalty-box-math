@@ -54,7 +54,7 @@ function SettingsMenu() {
               settings.setVirtualNumblock(evt.target.checked)
             }}
           />
-          Use virtual numblock (Touch)
+          Use virtual numblock (Touch/Mobile)
         </label>
         {settings.virtualNumblock ? null : (
           <label>

@@ -30,7 +30,8 @@
   transform: translateX(0%);
   transition: transform .3s ease-in-out;
   padding: 1rem;
-  width: 300px;
+  width: 325px;
+  width: max-content;
   max-width: 100vw;
   text-align: left;
 

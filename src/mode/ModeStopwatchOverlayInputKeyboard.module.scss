@@ -2,6 +2,16 @@
   font-weight: 700;
 }
 
+.inputFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  input {
+    width: 100%;
+  }
+}
+
 .trickyPenaltyAmount {
   text-decoration: underline;
   color: rgb(181, 0, 0);

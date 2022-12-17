@@ -3,6 +3,7 @@ import gaussian from 'gaussian'
 import Stopwatch from '../components/Stopwatch'
 import ModeStopwatchOverlayInputKeyboard from './ModeStopwatchOverlayInputKeyboard'
 import ModeStopwatchOverlayInputVirtualNumblock from './ModeStopwatchOverlayInputVirtualNumblock'
+import ValidationResponse from '../components/ValidationResponse'
 import SettingsContext from '../SettingsContext'
 
 import {FiX, FiXSquare} from 'react-icons/fi'
@@ -32,6 +33,7 @@ function ModeStopwatchOverlay() {
   const [time, setTime] = useState(null)
   const [penalties, setPenalties] = useState(null)
   const [isValid, setIsValid] = useState(null)
+  const [validationCount, setValidationCount] = useState(0)
   const [timeAttackStarted, setTimeAttackStarted] = useState(TIME_ATTACK_STATES.STOPPED)
   const [timeAttackDisplayTime, setTimeAttackDisplayTime] = useState(null)
   const [timeAttackSolvedCount, setTimeAttackSolvedCount] = useState(0)
@@ -72,6 +74,8 @@ function ModeStopwatchOverlay() {
   }, []);
 
   const verifyInput = useCallback(() => {
+    setValidationCount(validationCount + 1)
+
     let timeAdd1 = inputControl.current.value1.split(':')
     if (timeAdd1.length !== 2) {
       setIsValid(false)
@@ -91,7 +95,7 @@ function ModeStopwatchOverlay() {
     } else {
       setIsValid(false)
     }
-  }, [time, penalties]);
+  }, [time, penalties, validationCount]);
 
   const onSubmit = useCallback((evt) => {
     evt.preventDefault()
@@ -222,6 +226,11 @@ function ModeStopwatchOverlay() {
           </div>
         </div>
       ) : null}
+
+      <ValidationResponse
+        isValid={isValid}
+        validationCount={validationCount}
+      />
     </form>
   )
 }

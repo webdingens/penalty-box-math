@@ -50,26 +50,28 @@ class ModeStopwatchOverlayInputKeyboard extends React.Component {
           </>
         ) : null}
         </p>
-        <Input
-          label={penalties ? (
-            <>
-              Add <span className={classNames(styles.penaltyAmount, {
-                [styles.trickyPenaltyAmount]: penalties > 1
-              })}>{30 * penalties - 10}</span> seconds
-            </>
-          ) : null}
-          ref={this.inputAdd1}
-        />
-        <Input
-          label={penalties ? (
-            <>
-              Add <span className={classNames(styles.penaltyAmount, {
-                [styles.trickyPenaltyAmount]: penalties > 1
-              })}>{30 * penalties}</span> seconds
-            </>
-          ) : null}
-          ref={this.inputAdd2}
-        />
+        <div className={styles.inputFields}>
+          <Input
+            label={penalties ? (
+              <>
+                Add <span className={classNames(styles.penaltyAmount, {
+                  [styles.trickyPenaltyAmount]: penalties > 1
+                })}>{30 * penalties - 10}</span> seconds
+              </>
+            ) : null}
+            ref={this.inputAdd1}
+          />
+          <Input
+            label={penalties ? (
+              <>
+                Add <span className={classNames(styles.penaltyAmount, {
+                  [styles.trickyPenaltyAmount]: penalties > 1
+                })}>{30 * penalties}</span> seconds
+              </>
+            ) : null}
+            ref={this.inputAdd2}
+          />
+        </div>
         <div className={styles.controls}>
           {isValid === false || isValid === null ? (
             <button type="submit">Check answer</button>
@@ -77,11 +79,7 @@ class ModeStopwatchOverlayInputKeyboard extends React.Component {
           {isValid === true ? (
             <>
               <button onClick={onNext} type="button" ref={this.nextButton}>Next</button>
-              <p className={styles.feedback}>Correct answer!</p>
             </>
-          ) : null}
-          {isValid === false ? (
-            <p className={styles.feedback}>Not correct.</p>
           ) : null}
         </div>
       </>

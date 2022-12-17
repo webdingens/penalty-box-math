@@ -12,7 +12,11 @@
     stroke-width: 2px;
 
     &:active {
-      fill: green;
+      fill: #fff;
+
+      @media (prefers-color-scheme: dark) {
+        fill: #000;
+      }
     }
   }
 
@@ -117,50 +121,4 @@
   max-width: 100%;
 
   transform: translate(-50%, 0);
-}
-
-@keyframes glowSuccess {
-  from {
-    box-shadow: inset 0 0 3vw 1vw rgba(0, 255, 0, 0);
-  }
-  40% {
-    box-shadow: inset 0 0 3vw 1vw rgba(0, 255, 0, .6);
-  }
-  60% {
-    box-shadow: inset 0 0 3vw 1vw rgba(0, 255, 0, .6);
-  }
-  to {
-    box-shadow: inset 0 0 3vw 1vw rgba(0, 255, 0, 0);
-  }
-}
-
-.feedbackGlowSuccess {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  animation: glowSuccess 1s 1;
-}
-
-@keyframes glowFailure {
-  from {
-    box-shadow: inset 0 0 3vw 1vw rgba(255, 0, 0, 0);
-  }
-  40% {
-    box-shadow: inset 0 0 3vw 1vw rgba(255, 0, 0, .6);
-  }
-  60% {
-    box-shadow: inset 0 0 3vw 1vw rgba(255, 0, 0, .6);
-  }
-  to {
-    box-shadow: inset 0 0 3vw 1vw rgba(255, 0, 0, 0);
-  }
-}
-
-.feedbackGlowFailure {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  animation: glowFailure 1s 1;
 }

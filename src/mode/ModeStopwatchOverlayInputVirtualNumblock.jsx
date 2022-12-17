@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from './ModeStopwatchOverlayInputVirtualNumblock.module.scss'
+import {FiDelete, FiCornerDownLeft, FiChevronsRight} from 'react-icons/fi'
 
 class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
 
@@ -256,6 +257,7 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
             <text x="10" y="35" fontSize="32">
               {isValid ? 'Next' : 'Enter'}
             </text>
+            {isValid ? <FiChevronsRight x="10" y="50" size={35} /> : <FiCornerDownLeft x="10" y="50" size={35} />}
           </g>
           <g transform="translate(200, 400)"
             onClick={() => this.handleInput(':')}
@@ -268,25 +270,9 @@ class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
           >
             <rect x="0" y="0" width="100" height="200" vectorEffect="non-scaling-stroke"/>
             <text x="10" y="35" fontSize="32">Del</text>
+            <FiDelete x="10" y="50" size={35}/>
           </g>
         </svg>
-
-        {isValid !== null ? (
-          <div className={styles.controls}>
-            {isValid === true ? (
-              <>
-                <p className={styles.feedback}>Correct answer!</p>
-                <div className={styles.feedbackGlowSuccess}></div>
-              </>
-            ) : null}
-            {isValid === false ? (
-              <>
-                <p className={styles.feedback}>Not correct.</p>
-                <div className={styles.feedbackGlowFailure}></div>
-              </>
-            ) : null}
-          </div>
-        ) : null}
       </div>
     )
   } 

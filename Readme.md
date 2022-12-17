@@ -39,8 +39,10 @@ X add virtual keyboard to type directly (mobile)
     X Add fullscreen button, so the area don't wiggle wiggle (scrolls)
     - maybe style the enter button differently for feedback, add status message below "Enter"
     - Place the text response somewhere where we can read it
-  - add some visual response (maybe auditory?)
-  - add error/success feedback
+    X add some visual response to keypad
+    - maybe add keypad sounds for clicking
+  X add error/success feedback
+  - maybe add auditory error/success feedback?
   - Delete button should become left button when right is focussed and nothing is left to delete
   - add finer cursor control, like click at the beginning of the button
   - replace svg with css grid and real buttons
