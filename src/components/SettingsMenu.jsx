@@ -1,16 +1,28 @@
-import {useContext} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import classNames from 'classnames'
 import SettingsContext from '../SettingsContext'
 import {FiSettings, FiX} from 'react-icons/fi'
 import styles from './SettingsMenu.module.scss'
 
 function SettingsMenu() {
+  const [isOpen, setIsOpen] = useState(false)
   const settings = useContext(SettingsContext.Context);
 
   const onClick = () => {
-    settings.setSettingsMenuOpen(!settings.settingsMenuOpen)
-    if (settings.helpOpen) settings.setHelpOpen(false)
+    setIsOpen(!isOpen)
   }
+
+  useEffect(() => {
+    const onClickOutside = (evt) => {
+      if (!evt.target.closest(`.${styles.settingsMenu}`)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('click', onClickOutside)
+    return () => {
+      document.removeEventListener('click', onClickOutside)
+    }
+  }, [])
 
   return (
     <div className={styles.settingsMenu}>
@@ -19,39 +31,41 @@ function SettingsMenu() {
           classNames(
             styles.toggleBtn,
             {
-              [styles.toggleBtnActive]: settings.settingsMenuOpen
+              [styles.toggleBtnActive]: isOpen
             }
           )
         }
         onClick={onClick}
-      >{settings.settingsMenuOpen ? <FiX /> : <FiSettings />}</button>
+      >{isOpen ? <FiX /> : <FiSettings />}</button>
 
       <div
         className={
           classNames(
             styles.offCanvas,
             {
-              [styles.offCanvasActive]: settings.settingsMenuOpen
+              [styles.offCanvasActive]: isOpen
             }
           )
         }
       >
-        <label>
-          <input type="checkbox" checked={settings.splitInput}
-            onChange={(evt) => {
-              settings.setSplitInput(evt.target.checked)
-            }}
-          />
-          Two fields per input (keyboard)
-        </label>
         <label>
           <input type="checkbox" checked={settings.virtualNumblock}
             onChange={(evt) => {
               settings.setVirtualNumblock(evt.target.checked)
             }}
           />
-          Use virtual numblock
+          Use virtual numblock (Touch)
         </label>
+        {settings.virtualNumblock ? null : (
+          <label>
+            <input type="checkbox" checked={settings.splitInput}
+              onChange={(evt) => {
+                settings.setSplitInput(evt.target.checked)
+              }}
+            />
+            Two fields per input (keyboard)
+          </label>
+        )}
         {/* <label>
           Mode
           <select

@@ -1,17 +1,15 @@
-import {useContext, useState} from 'react'
+import {useEffect, useState} from 'react'
 import classNames from 'classnames'
 import { FiX, FiHelpCircle } from 'react-icons/fi';
 
-import SettingsContext from '../SettingsContext'
 import styles from './Help.module.scss'
 
 function Help() {
-  const settings = useContext(SettingsContext.Context)
+  const [isOpen, setIsOpen] = useState(false)
   const [hideLastSecondsDigit, setHideLastSecondsDigit] = useState(false)
 
   const onClick = () => {
-    settings.setHelpOpen(!settings.helpOpen)
-    if (settings.settingsMenuOpen) settings.setSettingsMenuOpen(false)
+    setIsOpen(!isOpen)
   }
 
   const getTableDisplay = (key, add, hideLastSecondsDigit = false) => {
@@ -22,6 +20,18 @@ function Help() {
     return `${minutes}:${seconds}`
   }
 
+  useEffect(() => {
+    const onClickOutside = (evt) => {
+      if (!evt.target.closest(`.${styles.help}`)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('click', onClickOutside)
+    return () => {
+      document.removeEventListener('click', onClickOutside)
+    }
+  }, [])
+
   return (
     <div className={styles.help}>
       <button type="button"
@@ -29,19 +39,19 @@ function Help() {
           classNames(
             styles.toggleBtn,
             {
-              [styles.toggleBtnActive]: settings.helpOpen
+              [styles.toggleBtnActive]: isOpen
             }
           )
         }
         onClick={onClick}
-      >{settings.helpOpen ? <FiX /> : <FiHelpCircle />}</button>
+      >{isOpen ? <FiX /> : <FiHelpCircle />}</button>
 
       <div
         className={
           classNames(
             styles.offCanvas,
             {
-              [styles.offCanvasActive]: settings.helpOpen
+              [styles.offCanvasActive]: isOpen
             }
           )
         }

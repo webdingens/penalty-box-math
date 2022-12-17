@@ -14,9 +14,10 @@ X option for all input fields: Split into minute and seconds fields (might be be
 X add addition tables
 X change page title
 X use invariable font face of noto sans
-- click outside should close menu
-- menu open shouldn't be part of the initial state of settings
-  - should stay part of settings because of each menu toggling off the other when opening (mutually exclusive to share space)
+X click outside should close menu
+X menu open shouldn't be part of the initial state of settings
+  X should stay part of settings because of each menu toggling off the other when opening (mutually exclusive to share space) -> revised: doesn't need to be part of settings, because they close on click outside
+  X remove open state of off canvas menus from settings
 - add favicon
 
 ## Stopwatch

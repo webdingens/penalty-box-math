@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react'
+import React, {useEffect} from 'react'
 export const Context = React.createContext()
 
 export const modes = {
@@ -11,8 +11,6 @@ export const modes = {
 const initialState = {
   splitInput: false,
   mode: modes.STOPWATCH_OVERLAY,
-  settingsMenuOpen: false,
-  helpOpen: false,
   smallStopwatch: window.innerHeight < 1000,
   virtualNumblock: window.innerWidth < 600,
   inFullscreen: false,
@@ -20,8 +18,6 @@ const initialState = {
 
 const actions = {
   SET_SPLIT_INPUT: 'SET_SPLIT_INPUT',
-  SET_SETTINGS_MENU_OPEN: 'SET_SETTINGS_MENU_OPEN',
-  SET_HELP_OPEN: 'SET_HELP_OPEN',
   SET_MODE: 'SET_MODE',
   SET_SMALL_STOPWATCH: 'SET_SMALL_STOPWATCH',
   SET_VIRTUAL_NUMBLOCK: 'SET_VIRTUAL_NUMBLOCK',
@@ -34,16 +30,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         splitInput: action.splitInput
-      };
-    case actions.SET_SETTINGS_MENU_OPEN:
-      return {
-        ...state,
-        settingsMenuOpen: action.settingsMenuOpen
-      };
-    case actions.SET_HELP_OPEN:
-      return {
-        ...state,
-        helpOpen: action.helpOpen
       };
     case actions.SET_MODE:
       return {
@@ -76,8 +62,6 @@ const loadState = () => {
   const storedState = localStorage.getItem('settings');
   if (!storedState) return initialState
   return Object.assign({}, initialState, JSON.parse(localStorage.getItem('settings')), {
-    settingsMenuOpen: initialState.settingsMenuOpen,
-    helpOpen: initialState.helpOpen,
     inFullscreen: initialState.inFullscreen,
   })
 }
