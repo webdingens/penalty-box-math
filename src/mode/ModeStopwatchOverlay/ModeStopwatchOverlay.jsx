@@ -1,27 +1,14 @@
 import { useCallback, useEffect, useRef, useState, useContext } from 'react'
-import gaussian from 'gaussian'
-import Stopwatch from '../components/Stopwatch'
+import {getRandomTime, getRandomPenalties, toDisplayTime} from '../../utils/utils'
+import Stopwatch from '../../components/Stopwatch'
 import ModeStopwatchOverlayInputKeyboard from './ModeStopwatchOverlayInputKeyboard'
 import ModeStopwatchOverlayInputVirtualNumblock from './ModeStopwatchOverlayInputVirtualNumblock'
-import ValidationResponse from '../components/ValidationResponse'
-import SettingsContext from '../SettingsContext'
+import ValidationResponse from '../../components/ValidationResponse'
+import SettingsContext from '../../SettingsContext'
 
 import {FiX, FiXSquare} from 'react-icons/fi'
 
 import styles from './ModeStopwatchOverlay.module.scss'
-
-const gaussdistribution = gaussian(0, Math.pow(2 * 60, 2))
-
-const penaltyProbabilities = [
-  {
-    penalties: 1,
-    probability: .8
-  },
-  {
-    penalties: 2,
-    probability: .2
-  },
-]
 
 const TIME_ATTACK_STATES = {
   STOPPED: 'STOPPED',
@@ -30,12 +17,12 @@ const TIME_ATTACK_STATES = {
 }
 
 function ModeStopwatchOverlay() {
-  const [time, setTime] = useState(null)
-  const [penalties, setPenalties] = useState(null)
+  const [time, setTime] = useState(getRandomTime())
+  const [penalties, setPenalties] = useState(getRandomPenalties())
   const [isValid, setIsValid] = useState(null)
   const [validationCount, setValidationCount] = useState(0)
   const [timeAttackStarted, setTimeAttackStarted] = useState(TIME_ATTACK_STATES.STOPPED)
-  const [timeAttackDisplayTime, setTimeAttackDisplayTime] = useState(null)
+  const [timeAttackTimeRemaining, setTimeAttackTimeRemaining] = useState(null)
   const [timeAttackSolvedCount, setTimeAttackSolvedCount] = useState(0)
 
   const settings = useContext(SettingsContext.Context)
@@ -45,29 +32,16 @@ function ModeStopwatchOverlay() {
   const module = useRef();
 
   const setRandomTime = useCallback(() => {
-    // const newTime = Math.floor(Math.random() * (5 * 60 + 1)) // 5 minutes
-    const newTime = Math.floor(Math.abs(gaussdistribution.random(1)[0])) // 5 minutes
-    setTime(newTime)
+    setTime(getRandomTime())
   }, []);
 
-  const setRandomPenalty = useCallback(() => {
-    // draw randomly
-    const sample = Math.random();
-    let penalties = penaltyProbabilities.reduce((prev, current) => {
-      if (typeof prev === 'object') return prev;
-      if (prev + current.probability > sample) return current
-      return prev + current.probability
-    }, 0)
-
-    // if nothing gets selected because of rounding errors near the end, select last entry
-    if (typeof penalties !== 'object') penalties = penaltyProbabilities[penaltyProbabilities.length -1]
-
-    setPenalties(penalties.penalties)
+  const setRandomPenalties = useCallback(() => {
+    setPenalties(getRandomPenalties())
   }, []);
 
   const onNext = useCallback(() => {
     setRandomTime()
-    setRandomPenalty()
+    setRandomPenalties()
     setIsValid(null)
     inputControl.current.reset()
     inputControl.current.focus()
@@ -102,13 +76,11 @@ function ModeStopwatchOverlay() {
     verifyInput()
   }, [verifyInput])
 
-  const timeAttackStart = useCallback((evt) => setTimeAttackStarted(TIME_ATTACK_STATES.RUNNING), [])
-  const timeAttackStop = useCallback((evt) => setTimeAttackStarted(TIME_ATTACK_STATES.STOPPED), [])
+  const timeAttackStart = useCallback(() => setTimeAttackStarted(TIME_ATTACK_STATES.RUNNING), [])
+  const timeAttackStop = useCallback(() => setTimeAttackStarted(TIME_ATTACK_STATES.STOPPED), [])
 
-  // init
+  // initial focus
   useEffect(() => {
-    setRandomTime()
-    setRandomPenalty()
     inputControl.current.focus()
   }, []);
 
@@ -128,10 +100,10 @@ function ModeStopwatchOverlay() {
     // init
     const startTimeStamp = Date.now()
     const duration = 120 // 2 * 60  // seconds
-    setTimeAttackDisplayTime(duration)
+    setTimeAttackTimeRemaining(duration)
     setTimeAttackSolvedCount(0)
     setRandomTime()
-    setRandomPenalty()
+    setRandomPenalties()
     inputControl.current.reset()
     inputControl.current.focus()
     let raf
@@ -148,7 +120,7 @@ function ModeStopwatchOverlay() {
 
       // update
       const dt = nextTimeStamp - startTimeStamp
-      setTimeAttackDisplayTime(duration - Math.floor(dt / 1000))
+      setTimeAttackTimeRemaining(duration - Math.floor(dt / 1000))
 
       raf = requestAnimationFrame(updateTime)
     }
@@ -205,7 +177,7 @@ function ModeStopwatchOverlay() {
           title="Current time, abort time attack mode"
           onClick={timeAttackStop}
         >
-          {Math.floor(timeAttackDisplayTime / 60)}:{String(timeAttackDisplayTime % 60).padStart(2,'0')}
+          {toDisplayTime(timeAttackTimeRemaining)}
           <FiXSquare />
         </button>
       )}

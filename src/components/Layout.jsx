@@ -1,9 +1,11 @@
-import {useContext} from 'react'
+import React, {useContext, Suspense} from 'react'
 import {Context as SettingsContext, modes} from '../SettingsContext'
-import ModeStopwatchOverlay from '../mode/ModeStopwatchOverlay'
 import SettingsMenu from './SettingsMenu'
 import Help from './Help'
 import FullScreenToggle from './FullScreenToggle'
+
+const ModeStopwatchOverlay = React.lazy(() => import('../mode/ModeStopwatchOverlay/ModeStopwatchOverlay'))
+const ModeSheet = React.lazy(() => import('../mode/ModeSheet/ModeSheet'))
 
 function Layout() {
   const state = useContext(SettingsContext);
@@ -14,6 +16,9 @@ function Layout() {
     case  modes.STOPWATCH_OVERLAY:
       modeComponent = <ModeStopwatchOverlay />
       break
+    case  modes.SHEET:
+      modeComponent = <ModeSheet />
+      break
     default:
       modeComponent = <p>Undefined Component: {state.mode}</p>
       break
@@ -21,7 +26,9 @@ function Layout() {
 
   return (
     <main>
-      {modeComponent}
+      <Suspense>
+        {modeComponent}
+      </Suspense>
 
       <SettingsMenu />
       <Help />

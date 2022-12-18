@@ -66,7 +66,7 @@ function SettingsMenu() {
             Two fields per input (keyboard)
           </label>
         )}
-        {/* <label>
+        <label>
           Mode
           <select
             onChange={(evt) => {
@@ -80,7 +80,7 @@ function SettingsMenu() {
               )
             })}
           </select>
-        </label> */}
+        </label>
       </div>
     </div>
   )

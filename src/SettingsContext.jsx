@@ -3,14 +3,12 @@ export const Context = React.createContext()
 
 export const modes = {
   STOPWATCH_OVERLAY: 'Stopwatch Overlay',
-  PROMPT: 'Prompt',
-  STOPWATCH_AND_SHEET: 'Stopwatch + Sheet',
   SHEET: 'Sheet',
 }
 
 const initialState = {
   splitInput: false,
-  mode: modes.STOPWATCH_OVERLAY,
+  mode: modes.SHEET,
   smallStopwatch: window.innerHeight < 1000,
   virtualNumblock: window.innerWidth < 600,
   inFullscreen: false,

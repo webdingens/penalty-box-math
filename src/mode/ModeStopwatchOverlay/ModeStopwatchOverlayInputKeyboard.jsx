@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import Input from '../components/Input'
+import Input from '../../components/Input'
 
 import styles from './ModeStopwatchOverlayInputKeyboard.module.scss'
 

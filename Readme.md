@@ -48,6 +48,13 @@ X add virtual keyboard to type directly (mobile)
   - replace svg with css grid and real buttons
 - Add better responses / brighter button
 
+## Sheet
+
+- add Stopwatch
+- add skater representation
+  - Pivot and Blocker
+- add Jammer time event coming from a direction (PBM)
+
 ## Variations
 
 - Sheet
