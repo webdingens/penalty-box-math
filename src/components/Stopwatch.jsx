@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import styles from './Stopwatch.module.scss'
 import {FiZoomIn, FiZoomOut} from 'react-icons/fi'
 
-function Stopwatch({time}) {
+function Stopwatch({time, zoomable = true, smallStopwatch = null}) {
   const moduleDOM = useRef()
   const settings = useContext(SettingsContext.Context)
 
@@ -27,14 +27,16 @@ function Stopwatch({time}) {
     }
   }, [settings.smallStopwatch])
 
+  const showSmallStopwatch = !zoomable && typeof smallStopwatch === 'boolean' ? smallStopwatch : settings.smallStopwatch
+
   return (
     <div
       className={classNames(styles.stopwatch, {
-        [styles.smallStopwatch]: settings.smallStopwatch
+        [styles.smallStopwatch]: showSmallStopwatch
       })}
       ref={moduleDOM}
     >
-      {!settings.smallStopwatch ? (
+      {!showSmallStopwatch ? (
         <img src={stopwatch} alt="" width="300px" style={{
           'aspectRatio': 335 / 394
         }}/>
@@ -44,13 +46,15 @@ function Stopwatch({time}) {
 
       <p className={styles.timeOverlay}><span className={styles.timeOverlay__left}>{Math.floor(time / 60)}</span>:<span className={styles.timeOverlay__right}>{String(time % 60).padStart(2, '0')}<span className={styles.timeOverlay__milliseconds}>00</span></span></p>
 
-      <button
-        type="button"
-        onClick={() => settings.setSmallStopwatch(!settings.smallStopwatch)}
-        title="Toggle between LCD only and full smartwatch"
-      >
-        {settings.smallStopwatch ? <FiZoomOut /> : <FiZoomIn />}
-      </button>
+      {zoomable ? (
+        <button
+          type="button"
+          onClick={() => settings.setSmallStopwatch(!settings.smallStopwatch)}
+          title="Toggle between LCD only and full smartwatch"
+        >
+          {settings.smallStopwatch ? <FiZoomOut /> : <FiZoomIn />}
+        </button>
+      ) : null}
     </div>
   )
 }

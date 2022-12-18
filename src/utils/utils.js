@@ -14,9 +14,9 @@ const penaltyProbabilities = [
 ]
 
 const positions = {
-  BLOCKER: 'BLOCKER',
-  PIVOT: 'PIVOT',
-  JAMMER: 'JAMMER'
+  BLOCKER: 'Blocker',
+  PIVOT: 'Pivot',
+  JAMMER: 'Jammer'
 }
 
 const positionProbabilities = [
@@ -33,6 +33,8 @@ const positionProbabilities = [
     probability: 1 / 5
   }
 ]
+
+const inBetweenProbability = .1;
 
 export const getRandomTime = () => {
   // const newTime = Math.floor(Math.random() * (5 * 60 + 1)) // 5 minutes
@@ -73,6 +75,14 @@ export const getRandomSkaterPosition = () => {
   if (typeof position !== 'object') position = positionProbabilities[positionProbabilities.length -1]
 
   return position.position
+}
+
+export const getRandomJam = () => {
+  return Math.floor(Math.random() * 28)
+}
+
+export const getRandomInBetween = () => {
+  return Math.random() < inBetweenProbability
 }
 
 export function toDisplayTime(time) {
