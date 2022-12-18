@@ -8,7 +8,7 @@ export const modes = {
 
 const initialState = {
   splitInput: false,
-  mode: modes.SHEET,
+  mode: modes.STOPWATCH_OVERLAY,
   smallStopwatch: window.innerHeight < 1000,
   virtualNumblock: window.innerWidth < 600,
   inFullscreen: false,
