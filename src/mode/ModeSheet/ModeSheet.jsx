@@ -89,7 +89,7 @@ function ModeSheet() {
 
     // init
     const startTimeStamp = Date.now()
-    const duration = 120 // 2 * 60  // seconds
+    const duration = 5 // 2 * 60  // seconds
     setTimeAttackTimeRemaining(duration)
     setTimeAttackPrompts([])
     initNewPrompt()

@@ -72,7 +72,11 @@ function Sheet({
 
       {type === SHEET_TYPES.SHORT ? (
         <div className={styles.tableWrapper}>
-          <table className={classNames(styles.table, styles.tableShort)}>
+          <table className={classNames(
+            styles.table,
+            styles.tableShort,
+            styles.tableVariableWidth
+          )}>
             <thead>
               <tr>
                 <th>Jam #</th>
