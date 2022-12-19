@@ -118,7 +118,7 @@ function ModeSheet() {
   }, [timeAttackStarted])
 
   return (
-    <>
+    <div className={styles.module}>
       <div>
         <p className={styles.stopwatchLabel}>Time skater sat down:</p>
         <Stopwatch
@@ -203,7 +203,7 @@ function ModeSheet() {
         </div>
       ) : null}
 
-    </>
+    </div>
   )
 }
 

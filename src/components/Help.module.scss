@@ -1,9 +1,4 @@
 .help {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 1;
-
   td, th {
     text-align: center;
   }
@@ -13,25 +8,11 @@
   }
 }
 
-.toggleBtn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1;
-  margin: 0;
-  padding: 0.75rem;
-
-  svg {
-    display: block;
-    pointer-events: none;
-  }
-}
-
 .offCanvas {
-  position: absolute;
-  top: 4.5rem;
-  left: 100%;
-  transform: translateX(0%);
+  position: fixed;
+  bottom: 100%;
+  right: 0;
+  transform: translateY(0%);
   transition: transform .3s ease-in-out;
   padding: 1rem;
   width: 350px;
@@ -47,5 +28,5 @@
   }
 }
 .offCanvasActive {
-  transform: translateX(-100%);
+  transform: translateY(4.5rem) translateY(100%);
 }

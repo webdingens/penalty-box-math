@@ -1,0 +1,60 @@
+.navbar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
+  max-width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > div {
+    display: inline-flex;
+  }
+
+  .button,
+  button {
+    margin: 0;
+    padding: 0.5rem;
+    background: var(--background);
+    color: #1d1d1d;
+    color: var(--form-text);
+    border-radius: 0;
+    border: 1px solid #aaa;
+
+    position: relative;
+    z-index: 2;
+  
+    background-color: #d0cfcf;
+    background-color: var(--button-base);
+  
+    @media (prefers-color-scheme: dark) {
+      background-color: #0c151c;
+      background-color: var(--button-base);
+
+      border-color: #aaa;
+    }
+  
+    svg {
+      display: block;
+      pointer-events: none;
+    }
+  
+    &:focus {
+      box-shadow: none;
+      border-color: #0096bfab;
+      border-color: var(--focus);
+    }
+  
+    @media (prefers-color-scheme: dark) {
+      &:focus {
+        box-shadow: none;
+        border-color: #0096bfab;
+        border-color: var(--focus);
+      }
+    }
+  }
+}

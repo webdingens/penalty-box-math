@@ -1,10 +1,14 @@
 import Layout from '../components/Layout'
+import Navbar from '../components/Navbar'
 import ModeSheet from '../mode/ModeSheet/ModeSheet'
 
 function SheetPage() {
   return (
     <Layout>
-      <ModeSheet />
+      <Navbar />
+      <main>
+        <ModeSheet />
+      </main>
     </Layout>
   )
 }

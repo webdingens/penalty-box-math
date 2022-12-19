@@ -1,29 +1,13 @@
 .settingsMenu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.toggleBtn {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 1;
-  margin: 0;
-  padding: 0.75rem;
-
-  svg {
-    display: block;
-    pointer-events: none;
-  }
+  position: relative;
 }
 
 .offCanvas {
-  position: absolute;
-  top: 4.5rem;
-  right: 100%;
-  transform: translateX(0%);
+  position: fixed;
+  z-index: 1;
+  bottom: 100%;
+  left: 0;
+  transform: translateY(0%);
   transition: transform .3s ease-in-out;
   padding: 1rem;
   width: 325px;
@@ -51,5 +35,5 @@
   }
 }
 .offCanvasActive {
-  transform: translateX(100%);
+  transform: translateY(4.5rem) translateY(100%);
 }

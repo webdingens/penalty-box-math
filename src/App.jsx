@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react'
+import {Routes, Route} from 'react-router-dom'
 
 import {Provider} from './SettingsContext'
-import {Routes, Route} from 'react-router-dom'
 
 const IndexPage = React.lazy(() => import('./pages/IndexPage'))
 const StopwatchOverlayPage = React.lazy(() => import('./pages/StopwatchOverlayPage'))
