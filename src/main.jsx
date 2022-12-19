@@ -4,9 +4,12 @@ import App from './App'
 import 'sanitize.css'
 import 'water.css'
 import './index.scss'
+import {BrowserRouter} from "react-router-dom"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
 )

@@ -27,14 +27,7 @@ function SettingsMenu() {
   return (
     <div className={styles.settingsMenu}>
       <button type="button"
-        className={
-          classNames(
-            styles.toggleBtn,
-            {
-              [styles.toggleBtnActive]: isOpen
-            }
-          )
-        }
+        className={styles.toggleBtn}
         onClick={onClick}
       >{isOpen ? <FiX /> : <FiSettings />}</button>
 
@@ -66,21 +59,6 @@ function SettingsMenu() {
             Two fields per input (keyboard)
           </label>
         )}
-        <label>
-          Mode
-          <select
-            onChange={(evt) => {
-              settings.setMode(evt.target.value)
-            }}
-            value={settings.mode}
-          >
-            {Object.keys(SettingsContext.modes).map(key => {
-              return (
-                <option value={SettingsContext.modes[key]} key={key}>{SettingsContext.modes[key]}</option>
-              )
-            })}
-          </select>
-        </label>
       </div>
     </div>
   )
