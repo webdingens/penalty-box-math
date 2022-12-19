@@ -4,7 +4,7 @@ import { FiX, FiHelpCircle } from 'react-icons/fi';
 
 import styles from './Help.module.scss'
 
-function Help() {
+function Help({children}) {
   const [isOpen, setIsOpen] = useState(false)
   const [hideLastSecondsDigit, setHideLastSecondsDigit] = useState(false)
 
@@ -56,16 +56,8 @@ function Help() {
           )
         }
       >
-        <h2>Accepted inputs</h2>
-        <p>
-          :00 - 0:59 <br />
-          0:00 - 0:59 <br />
-          1:00 - 1:59 <br />
-          2:00 - 2:59 <br />
-          3:00 - 3:59 <br />
-          4:00 - 4:59 <br />
-        </p>
-        <p>You can press Enter/Return to submit the input.</p>
+        {/* Specific help can be passed as children */}
+        {children}
 
         <h2>Tip 1:</h2>
         <p>You can reuse the addition of 20 and add 10 in the second step.</p>

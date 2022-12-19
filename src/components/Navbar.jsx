@@ -1,9 +1,12 @@
+import React, {Suspense} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import {FiArrowLeft} from 'react-icons/fi'
 import styles from './Navbar.module.scss'
 import SettingsMenu from './SettingsMenu'
 import Help from './Help'
 import FullScreenToggle from './FullScreenToggle'
+
+const ModeStopwatchOverlayHelp = React.lazy(() => import('../mode/ModeStopwatchOverlay/ModeStopwatchOverlayHelp'))
 
 function Navbar() {
   const location = useLocation()
@@ -19,7 +22,15 @@ function Navbar() {
 
       <div>
         {location.pathname !== '/' ? <FullScreenToggle /> : null}
-        {location.pathname !== '/' ? <Help /> : null}
+        {location.pathname !== '/' ? (
+          <Help>
+            {location.pathname === '/stopwatch' ? (
+              <Suspense>
+                <ModeStopwatchOverlayHelp />
+              </Suspense>
+            ) : null}
+          </Help>
+        ) : null}
       </div>
     </div>
   )
