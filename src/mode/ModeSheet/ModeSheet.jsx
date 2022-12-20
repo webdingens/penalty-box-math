@@ -100,9 +100,10 @@ function ModeSheet() {
 
     // init
     const startTimeStamp = Date.now()
-    const duration = 120 // 2 * 60  // seconds
+    const duration = 2 // 2 * 60  // seconds
     setTimeAttackTimeRemaining(duration)
     setTimeAttackPrompts([])
+    setChecking(false)
     initNewPrompt()
     initialFocus.current.focus()
     let raf
@@ -170,7 +171,13 @@ function ModeSheet() {
             ]}
           />
 
-          <button type="button" onClick={onClickShowFullTable} title={showFullTable ? 'Show short table' : 'Show full table'}>{showFullTable ? 'Short' : 'Full'}</button>
+          <div className={styles.toggleFullTableWrapper}>
+            <button type="button"
+              onClick={onClickShowFullTable}
+              title={showFullTable ? 'Show short table' : 'Show full table'}
+              className={styles.toggleFullTable}
+            >{showFullTable ? 'Short' : 'Full'}</button>
+          </div>
         </div>
       ) : null}
 
@@ -189,8 +196,12 @@ function ModeSheet() {
               rows={timeAttackPrompts}
             />
 
-            <div>
-              <button type="button" onClick={onClickShowFullTable} title={showFullTable ? 'Show short table' : 'Show full table'}>{showFullTable ? 'Short' : 'Full'}</button>
+            <div className={styles.toggleFullTableWrapper}>
+              <button type="button"
+                onClick={onClickShowFullTable}
+                title={showFullTable ? 'Show short table' : 'Show full table'}
+                className={styles.toggleFullTable}
+                >{showFullTable ? 'Short' : 'Full'}</button>
             </div>
           </div>
         </div>

@@ -44,6 +44,7 @@ function Help({children}) {
           )
         }
         onClick={onClick}
+        title="Open help text"
       >{isOpen ? <FiX /> : <FiHelpCircle />}</button>
 
       <div

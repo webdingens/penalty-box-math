@@ -29,6 +29,7 @@ function SettingsMenu() {
       <button type="button"
         className={styles.toggleBtn}
         onClick={onClick}
+        title="Open settings"
       >{isOpen ? <FiX /> : <FiSettings />}</button>
 
       <div

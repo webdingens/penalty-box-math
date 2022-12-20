@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react'
 import {Link, useLocation} from 'react-router-dom'
-import {FiArrowLeft} from 'react-icons/fi'
+import {FiHome} from 'react-icons/fi'
 import styles from './Navbar.module.scss'
 import SettingsMenu from './SettingsMenu'
 import Help from './Help'
@@ -15,7 +15,11 @@ function Navbar() {
     <div className={styles.navbar}>
       <div>
         {location.pathname !== '/' ? (
-          <Link to="/" className={styles.button}><FiArrowLeft /></Link>
+          <Link to="/" className={styles.button}
+            title="Go to overview"
+          >
+            <FiHome />
+          </Link>
         ) : null}
         {location.pathname === '/stopwatch' ? <SettingsMenu /> : null}
       </div>
