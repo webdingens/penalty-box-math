@@ -14,38 +14,6 @@
   font-size: 1rem * math.div(14, 16);
 }
 
-.timeAttackButton {
-  position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  padding-top: 9px;
-  background: #ff9999;
-  padding-inline: 1.25rem;
-
-  display: inline-flex;
-  place-items: center;
-
-  &:hover {
-    background: #ff4141;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background: #660000;
-  
-    &:hover {
-      background: #880000;
-    }
-  }
-
-  svg {
-    display: block;
-    margin-left: 1rem;
-    margin-right: -.25rem;
-  }
-}
-
 .resultsOverlay {
   position: fixed;
   top: 50%;

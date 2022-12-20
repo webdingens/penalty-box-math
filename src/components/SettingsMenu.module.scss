@@ -35,5 +35,5 @@
   }
 }
 .offCanvasActive {
-  transform: translateY(4.5rem) translateY(100%);
+  transform: translateY(var(--navbar-height)) translateY(100%);
 }

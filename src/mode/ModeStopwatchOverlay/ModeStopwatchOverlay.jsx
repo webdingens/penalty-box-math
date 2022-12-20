@@ -1,28 +1,38 @@
 import { useCallback, useEffect, useRef, useState, useContext } from 'react'
-import {getRandomTime, getRandomPenalties, toDisplayTime} from '../../utils/utils'
+import {getRandomTime, getRandomPenalties} from '../../utils/utils'
 import Stopwatch from '../../components/Stopwatch'
 import ModeStopwatchOverlayInputKeyboard from './ModeStopwatchOverlayInputKeyboard'
 import ModeStopwatchOverlayInputVirtualNumblock from './ModeStopwatchOverlayInputVirtualNumblock'
 import ValidationResponse from '../../components/ValidationResponse'
 import SettingsContext from '../../SettingsContext'
+import {
+  TIME_ATTACK_STATES,
+  useTimeAttackStarted,
+  useTimeAttackTimeRemaining
+} from '../../state/timeAttack'
 
-import {FiX, FiXSquare} from 'react-icons/fi'
+import {FiX} from 'react-icons/fi'
 
 import styles from './ModeStopwatchOverlay.module.scss'
 
-const TIME_ATTACK_STATES = {
-  STOPPED: 'STOPPED',
-  RUNNING: 'RUNNING',
-  RESULTS: 'RESULTS'
-}
 
 function ModeStopwatchOverlay() {
   const [time, setTime] = useState(getRandomTime())
   const [penalties, setPenalties] = useState(getRandomPenalties())
   const [isValid, setIsValid] = useState(null)
   const [validationCount, setValidationCount] = useState(0)
-  const [timeAttackStarted, setTimeAttackStarted] = useState(TIME_ATTACK_STATES.STOPPED)
-  const [timeAttackTimeRemaining, setTimeAttackTimeRemaining] = useState(null)
+  const [
+    timeAttackStarted,
+    setTimeAttackStarted
+  ] = useTimeAttackStarted(
+      (state) => [
+        state.timeAttackStarted,
+        state.setTimeAttackStarted
+      ]
+    )
+  const setTimeAttackTimeRemaining = useTimeAttackTimeRemaining(
+      (state) => state.setTimeAttackTimeRemaining
+    )
   const [timeAttackSolvedCount, setTimeAttackSolvedCount] = useState(0)
 
   const settings = useContext(SettingsContext.Context)
@@ -76,8 +86,14 @@ function ModeStopwatchOverlay() {
     verifyInput()
   }, [verifyInput])
 
-  const timeAttackStart = useCallback(() => setTimeAttackStarted(TIME_ATTACK_STATES.RUNNING), [])
   const timeAttackStop = useCallback(() => setTimeAttackStarted(TIME_ATTACK_STATES.STOPPED), [])
+
+  // stop time attack on unmount
+  useEffect(() => {
+    return () => {
+      timeAttackStop()
+    }
+  }, [])
 
   // initial focus
   useEffect(() => {
@@ -162,24 +178,6 @@ function ModeStopwatchOverlay() {
           isValid={isValid}
           penalties={penalties}
         />
-      )}
-
-      {/* Red time attack button at top */}
-      {timeAttackStarted !== TIME_ATTACK_STATES.RUNNING ? (
-        <button type="button"
-          className={styles.timeAttackButton}
-          title="Starts the 2 minute time attack mode"
-          onClick={timeAttackStart}
-        >Time Attack</button>
-      ) : (
-        <button type="button"
-          className={styles.timeAttackButton}
-          title="Current time, abort time attack mode"
-          onClick={timeAttackStop}
-        >
-          {toDisplayTime(timeAttackTimeRemaining)}
-          <FiXSquare />
-        </button>
       )}
 
       {/* Results overlay after time attack */}

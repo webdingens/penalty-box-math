@@ -5,6 +5,7 @@ import styles from './Navbar.module.scss'
 import SettingsMenu from './SettingsMenu'
 import Help from './Help'
 import FullScreenToggle from './FullScreenToggle'
+import TimeAttackButton from './TimeAttackButton'
 
 const ModeStopwatchOverlayHelp = React.lazy(() => import('../mode/ModeStopwatchOverlay/ModeStopwatchOverlayHelp'))
 
@@ -19,6 +20,7 @@ function Navbar() {
         {location.pathname === '/stopwatch' ? <SettingsMenu /> : null}
       </div>
 
+      {location.pathname !== '/' ? <TimeAttackButton /> : null}
 
       <div>
         {location.pathname !== '/' ? <FullScreenToggle /> : null}

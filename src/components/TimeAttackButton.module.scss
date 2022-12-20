@@ -1,0 +1,29 @@
+.timeAttackButton.timeAttackButton {
+  margin: 0;
+  background: #ff9999;
+  padding-inline: 1.25rem;
+  padding-block: 0.5rem;
+
+  display: inline-flex;
+  place-items: center;
+
+  line-height: 16px;
+
+  &:hover {
+    background: #ff4141;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: #660000;
+  
+    &:hover {
+      background: #880000;
+    }
+  }
+
+  svg {
+    display: block;
+    margin-left: 1rem;
+    margin-right: -.25rem;
+  }
+}

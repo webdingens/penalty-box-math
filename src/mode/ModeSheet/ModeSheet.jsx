@@ -6,20 +6,18 @@ import {
   getRandomSkaterNumber,
   getRandomSkaterPosition,
   getRandomInBetween,
-  toDisplayTime,
 } from '../../utils/utils'
 import Stopwatch from '../../components/Stopwatch'
 import Sheet, {SHEET_TYPES} from '../../components/Sheet'
+import {
+  TIME_ATTACK_STATES,
+  useTimeAttackStarted,
+  useTimeAttackTimeRemaining
+} from '../../state/timeAttack'
 
-import {FiX, FiXSquare} from 'react-icons/fi'
+import {FiX} from 'react-icons/fi'
 
 import styles from './ModeSheet.module.scss'
-
-const TIME_ATTACK_STATES = {
-  STOPPED: 'STOPPED',
-  RUNNING: 'RUNNING',
-  RESULTS: 'RESULTS'
-}
 
 function ModeSheet() {
   const [time, setTime] = useState(getRandomTime())
@@ -30,8 +28,18 @@ function ModeSheet() {
   const [skaterNumber, setSkaterNumber] = useState(getRandomSkaterNumber())
   const [skaterPosition, setSkaterPosition] = useState(getRandomSkaterPosition())
   const [inBetween, setInBetween] = useState(getRandomInBetween())
-  const [timeAttackStarted, setTimeAttackStarted] = useState(TIME_ATTACK_STATES.STOPPED)
-  const [timeAttackTimeRemaining, setTimeAttackTimeRemaining] = useState(null)
+  const [
+    timeAttackStarted,
+    setTimeAttackStarted
+  ] = useTimeAttackStarted(
+      (state) => [
+        state.timeAttackStarted,
+        state.setTimeAttackStarted
+      ]
+    )
+  const setTimeAttackTimeRemaining = useTimeAttackTimeRemaining(
+      (state) => state.setTimeAttackTimeRemaining
+    )
   const [timeAttackPrompts, setTimeAttackPrompts] = useState([])
 
   const initialFocus = useRef();
@@ -77,11 +85,14 @@ function ModeSheet() {
     initialFocus.current.focus()
   }, []);
 
-  const timeAttackStart = useCallback(() => {
-    setTimeAttackStarted(TIME_ATTACK_STATES.RUNNING)
-    setChecking(false)
-  }, [])
   const timeAttackStop = useCallback(() => setTimeAttackStarted(TIME_ATTACK_STATES.STOPPED), [])
+
+  // stop time attack on unmount
+  useEffect(() => {
+    return () => {
+      timeAttackStop()
+    }
+  }, [])
 
   // onChange timeAttackStarted
   useEffect(() => {
@@ -162,24 +173,6 @@ function ModeSheet() {
           <button type="button" onClick={onClickShowFullTable} title={showFullTable ? 'Show short table' : 'Show full table'}>{showFullTable ? 'Short' : 'Full'}</button>
         </div>
       ) : null}
-
-      {/* Red time attack button at top */}
-      {timeAttackStarted !== TIME_ATTACK_STATES.RUNNING ? (
-        <button type="button"
-          className={styles.timeAttackButton}
-          title="Starts the 2 minute time attack mode"
-          onClick={timeAttackStart}
-        >Time Attack</button>
-      ) : (
-        <button type="button"
-          className={styles.timeAttackButton}
-          title="Current time, abort time attack mode"
-          onClick={timeAttackStop}
-        >
-          {toDisplayTime(timeAttackTimeRemaining)}
-          <FiXSquare />
-        </button>
-      )}
 
       {/* Results overlay after time attack */}
       {timeAttackStarted === TIME_ATTACK_STATES.RESULTS ? (
