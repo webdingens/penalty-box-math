@@ -13,6 +13,6 @@ function ModeStopwatchOverlayHelp() {
 
       <p>You can press Enter/Return to submit the input.</p>
     </>
-  )
+  );
 }
-export default ModeStopwatchOverlayHelp
+export default ModeStopwatchOverlayHelp;

@@ -1,6 +1,6 @@
-import Layout from '../components/Layout'
-import Navbar from '../components/Navbar'
-import ModeSheet from '../mode/ModeSheet/ModeSheet'
+import Layout from "../components/Layout";
+import Navbar from "../components/Navbar";
+import ModeSheet from "../mode/ModeSheet/ModeSheet";
 
 function SheetPage() {
   return (
@@ -10,7 +10,7 @@ function SheetPage() {
         <ModeSheet />
       </main>
     </Layout>
-  )
+  );
 }
 
-export default SheetPage
+export default SheetPage;

@@ -1,6 +1,6 @@
-import Layout from '../components/Layout'
-import Navbar from '../components/Navbar'
-import ModeStopwatchOverlay from '../mode/ModeStopwatchOverlay/ModeStopwatchOverlay'
+import Layout from "../components/Layout";
+import Navbar from "../components/Navbar";
+import ModeStopwatchOverlay from "../mode/ModeStopwatchOverlay/ModeStopwatchOverlay";
 
 function StopwatchOverlayPage() {
   return (
@@ -10,7 +10,7 @@ function StopwatchOverlayPage() {
         <ModeStopwatchOverlay />
       </main>
     </Layout>
-  )
+  );
 }
 
-export default StopwatchOverlayPage
+export default StopwatchOverlayPage;

@@ -1,60 +1,62 @@
-import {useContext, useEffect, useState} from 'react'
-import classNames from 'classnames'
-import SettingsContext from '../SettingsContext'
-import {FiSettings, FiX} from 'react-icons/fi'
-import styles from './SettingsMenu.module.scss'
+import { useContext, useEffect, useState } from "react";
+import classNames from "classnames";
+import SettingsContext from "../SettingsContext";
+import { FiSettings, FiX } from "react-icons/fi";
+import styles from "./SettingsMenu.module.scss";
 
 function SettingsMenu() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const settings = useContext(SettingsContext.Context);
 
   const onClick = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     const onClickOutside = (evt) => {
       if (!evt.target.closest(`.${styles.settingsMenu}`)) {
-        setIsOpen(false)
+        setIsOpen(false);
       }
-    }
-    document.addEventListener('click', onClickOutside)
+    };
+    document.addEventListener("click", onClickOutside);
     return () => {
-      document.removeEventListener('click', onClickOutside)
-    }
-  }, [])
+      document.removeEventListener("click", onClickOutside);
+    };
+  }, []);
 
   return (
     <div className={styles.settingsMenu}>
-      <button type="button"
+      <button
+        type="button"
         className={styles.toggleBtn}
         onClick={onClick}
         title="Open settings"
-      >{isOpen ? <FiX /> : <FiSettings />}</button>
+      >
+        {isOpen ? <FiX /> : <FiSettings />}
+      </button>
 
       <div
-        className={
-          classNames(
-            styles.offCanvas,
-            {
-              [styles.offCanvasActive]: isOpen
-            }
-          )
-        }
+        className={classNames(styles.offCanvas, {
+          [styles.offCanvasActive]: isOpen,
+        })}
       >
         <label>
-          <input type="checkbox" checked={settings.virtualNumblock}
+          <input
+            type="checkbox"
+            checked={settings.virtualNumblock}
             onChange={(evt) => {
-              settings.setVirtualNumblock(evt.target.checked)
+              settings.setVirtualNumblock(evt.target.checked);
             }}
           />
           Use virtual numblock (Touch/Mobile)
         </label>
         {settings.virtualNumblock ? null : (
           <label>
-            <input type="checkbox" checked={settings.splitInput}
+            <input
+              type="checkbox"
+              checked={settings.splitInput}
               onChange={(evt) => {
-                settings.setSplitInput(evt.target.checked)
+                settings.setSplitInput(evt.target.checked);
               }}
             />
             Two fields per input (keyboard)
@@ -62,7 +64,7 @@ function SettingsMenu() {
         )}
       </div>
     </div>
-  )
+  );
 }
 
-export default SettingsMenu
+export default SettingsMenu;

@@ -1,36 +1,36 @@
-import React, {Suspense} from 'react'
-import {Link, useLocation} from 'react-router-dom'
-import {FiHome} from 'react-icons/fi'
-import styles from './Navbar.module.scss'
-import SettingsMenu from './SettingsMenu'
-import Help from './Help'
-import FullScreenToggle from './FullScreenToggle'
-import TimeAttackButton from './TimeAttackButton'
+import React, { Suspense } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FiHome } from "react-icons/fi";
+import styles from "./Navbar.module.scss";
+import SettingsMenu from "./SettingsMenu";
+import Help from "./Help";
+import FullScreenToggle from "./FullScreenToggle";
+import TimeAttackButton from "./TimeAttackButton";
 
-const ModeStopwatchOverlayHelp = React.lazy(() => import('../mode/ModeStopwatchOverlay/ModeStopwatchOverlayHelp'))
+const ModeStopwatchOverlayHelp = React.lazy(() =>
+  import("../mode/ModeStopwatchOverlay/ModeStopwatchOverlayHelp")
+);
 
 function Navbar() {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <div className={styles.navbar}>
       <div>
-        {location.pathname !== '/' ? (
-          <Link to="/" className={styles.button}
-            title="Go to overview"
-          >
+        {location.pathname !== "/" ? (
+          <Link to="/" className={styles.button} title="Go to overview">
             <FiHome />
           </Link>
         ) : null}
-        {location.pathname === '/stopwatch' ? <SettingsMenu /> : null}
+        {location.pathname === "/stopwatch" ? <SettingsMenu /> : null}
       </div>
 
-      {location.pathname !== '/' ? <TimeAttackButton /> : null}
+      {location.pathname !== "/" ? <TimeAttackButton /> : null}
 
       <div>
-        {location.pathname !== '/' ? <FullScreenToggle /> : null}
-        {location.pathname !== '/' ? (
+        {location.pathname !== "/" ? <FullScreenToggle /> : null}
+        {location.pathname !== "/" ? (
           <Help>
-            {location.pathname === '/stopwatch' ? (
+            {location.pathname === "/stopwatch" ? (
               <Suspense>
                 <ModeStopwatchOverlayHelp />
               </Suspense>
@@ -39,7 +39,7 @@ function Navbar() {
         ) : null}
       </div>
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

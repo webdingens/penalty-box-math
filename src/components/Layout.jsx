@@ -1,12 +1,8 @@
-import React from 'react'
-import {useLocation} from 'react-router-dom'
+import React from "react";
+import { useLocation } from "react-router-dom";
 
-function Layout({children}) {
-  return (
-    <>
-      {children}
-    </>
-  )
+function Layout({ children }) {
+  return <>{children}</>;
 }
 
-export default Layout
+export default Layout;
