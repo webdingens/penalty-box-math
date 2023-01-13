@@ -58,7 +58,7 @@ function Help({ children }) {
 
         <h2>Tip 2:</h2>
         <p>
-          The right digit of the seconds part gets carried over and doesn't
+          The right digit of the seconds part gets carried over and doesn&apos;t
           change. (1 penalty)
         </p>
 

@@ -1,3 +1,8 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
+// This input variant is for touch input only
+
 import React from "react";
 import classNames from "classnames";
 import styles from "./ModeStopwatchOverlayInputVirtualNumblock.module.scss";
