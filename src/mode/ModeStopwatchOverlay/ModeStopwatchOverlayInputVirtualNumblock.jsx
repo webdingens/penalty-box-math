@@ -9,12 +9,8 @@ import styles from "./ModeStopwatchOverlayInputVirtualNumblock.module.scss";
 import { FiDelete, FiCornerDownLeft, FiChevronsRight } from "react-icons/fi";
 
 class ModeStopwatchOverlayInputVirtualNumblock extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.module = React.createRef();
-    this.topPart = React.createRef();
-  }
+  module = React.createRef();
+  topPart = React.createRef();
 
   state = {
     value1: "",

@@ -5,13 +5,9 @@ import Input from "../../components/Input";
 import styles from "./ModeStopwatchOverlayInputKeyboard.module.scss";
 
 class ModeStopwatchOverlayInputKeyboard extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.inputAdd1 = React.createRef();
-    this.inputAdd2 = React.createRef();
-    this.nextButton = React.createRef();
-  }
+  inputAdd1 = React.createRef();
+  inputAdd2 = React.createRef();
+  nextButton = React.createRef();
 
   reset() {
     this.inputAdd1.current.reset();

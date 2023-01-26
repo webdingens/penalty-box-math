@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useId } from "react";
 import classNames from "classnames";
 import SettingsContext from "../SettingsContext";
 
 import styles from "./Input.module.scss";
 
-class Input extends React.Component {
+export class Input extends React.Component {
   constructor(props) {
     super(props);
     this.input1Ref = React.createRef();
@@ -74,36 +74,54 @@ class Input extends React.Component {
   render() {
     const { id, label, settings } = this.props;
     const { value1, value2 } = this.state;
+
     return (
       <div
         className={classNames(styles.input, {
-          [styles.splitInput]: settings.splitInput,
+          [styles.splitInput]: settings?.splitInput,
         })}
       >
-        <label htmlFor={id}>{label}</label>
-        <div className={styles.inputFieldWrapper}>
-          <input
-            id={id}
-            type="text"
-            name={id}
-            ref={this.input1Ref}
-            onChange={this.onChange}
-            value={value1}
-          />
-          {settings.splitInput ? (
-            <>
-              <span>:</span>
+        {!settings?.splitInput ? (
+          <>
+            <label htmlFor={id}>{label}</label>
+            <div className={styles.inputFieldWrapper}>
               <input
                 id={id}
                 type="text"
                 name={id}
+                ref={this.input1Ref}
+                onChange={this.onChange}
+                value={value1}
+                aria-label={settings?.splitInput ? "Minutes" : ""}
+              />
+            </div>
+          </>
+        ) : (
+          <fieldset className={styles.unstyledFieldset}>
+            <legend>{label}</legend>
+            <div className={styles.inputFieldWrapper}>
+              <input
+                id={id}
+                type="text"
+                name={id}
+                ref={this.input1Ref}
+                onChange={this.onChange}
+                value={value1}
+                aria-label="Minutes"
+              />
+              <span>:</span>
+              <input
+                id={id + "-2"}
+                type="text"
+                name={id + "-2"}
                 ref={this.input2Ref}
                 onChange={this.onChange}
                 value={value2}
+                aria-label="Seconds"
               />
-            </>
-          ) : null}
-        </div>
+            </div>
+          </fieldset>
+        )}
       </div>
     );
   }
@@ -111,5 +129,6 @@ class Input extends React.Component {
 
 export default React.forwardRef((props, ref) => {
   const settings = useContext(SettingsContext.Context);
-  return <Input {...props} settings={settings} ref={ref} />;
+  const id = useId();
+  return <Input {...props} settings={settings} ref={ref} id={id} />;
 });

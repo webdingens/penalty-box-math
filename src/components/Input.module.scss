@@ -1,6 +1,8 @@
 .input {
-  label {
+  label,
+  legend {
     display: block;
+    margin-bottom: 4px;
   }
 
   input {
@@ -17,7 +19,6 @@
 }
 
 .splitInput {
-
   input {
     margin: 0;
   }
@@ -31,6 +32,12 @@
   }
 
   span {
-    margin: 0 .5rem;
+    margin: 0 0.5rem;
   }
+}
+
+.unstyledFieldset {
+  border: none;
+  margin-bottom: 0;
+  padding: 0;
 }
