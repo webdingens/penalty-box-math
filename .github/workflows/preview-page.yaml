@@ -26,6 +26,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
       VITE_BASE: /penalty-box-math/
     runs-on: ubuntu-latest
     steps:
