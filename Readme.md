@@ -2,7 +2,7 @@
 
 App to train additions coming up during the role of penalty box timer.
 
-[Demo](https://webdingens.github.io/penalty-box-math/)
+[Demo](https://penalty-box-stopwatch.netlify.app/)
 
 ## Requirements
 
